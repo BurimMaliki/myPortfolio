@@ -1,744 +1,2475 @@
 <!DOCTYPE html>
-<html lang="de">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Burim Portfolio Website</title>
-        
-        <!-- BOX ICONS -->
-        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-        <!-- Google Fonts -->
-        <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap' rel='stylesheet'>
-        
-        <style>
-            /*===== VARIABLES CSS =====*/
-            :root{
-                --header-height: 3rem;
-                --font-semi: 600;
-                
-                /*===== Colors =====*/
-                --hue-color: 224;
-                --first-color: hsl(var(--hue-color), 89%, 60%);
-                --second-color: hsl(var(--hue-color), 56%, 12%);
-
-                /*===== Font and typography =====*/
-                --body-font: 'Poppins', sans-serif;
-
-                --big-font-size: 2rem;
-                --h2-font-size: 1.25rem;
-                --normal-font-size: .938rem;
-                --smaller-font-size: .75rem;
-
-                /*===== Margins =====*/
-                --mb-2: 1rem;
-                --mb-4: 2rem;
-                --mb-5: 2.5rem;
-                --mb-6: 3rem;
-
-                /*===== z index =====*/
-                --z-back: -10;
-                --z-fixed: 100;
-            }
-
-            @media screen and (min-width: 968px){
-                :root {
-                    --big-font-size: 3.5rem;
-                    --h2-font-size: 2rem;
-                    --normal-font-size: 1rem;
-                    --smaller-font-size: .875rem;
-                }
-            }
-
-            /*===== BASE =====*/
-            *,::before,::after{
-                box-sizing: border-box;
-            }
-            html{
-                scroll-behavior: smooth;
-            }
-            body{
-                margin: var(--header-height) 0 0 0;
-                font-family: var(--body-font);
-                font-size: var(--normal-font-size);
-                color: var(--second-color);
-            }
-            h1,h2,p{
-                margin: 0;  
-            }
-            ul{
-                margin: 0;
-                padding: 0;
-                list-style: none;
-            }
-            a{
-                text-decoration: none;
-            }
-            img{
-                max-width: 100%;
-                height: auto;
-                display: block;
-            }
-
-            /*===== CLASS CSS ===== */
-            .section-title{
-                position: relative;
-                font-size: var(--h2-font-size);
-                color: var(--first-color);
-                margin-top: var(--mb-2);
-                margin-bottom: var(--mb-4);
-                text-align: center;
-            }
-
-            .section-title::after{
-                position: absolute;
-                content: '';
-                width: 64px;
-                height: 0.18rem;
-                left: 0;
-                right: 0;
-                margin: auto;
-                top: 2rem;
-                background-color: var(--first-color);
-            }
-
-            .section{
-                padding-top: 3rem;
-                padding-bottom: 2rem;
-            }
-
-            /*===== LAYOUT =====*/
-            .bd-grid{
-                max-width: 1024px;
-                display: grid;
-                margin-left: var(--mb-2);
-                margin-right: var(--mb-2);
-            }
-            .l-header{
-                width: 100%;
-                position: fixed;
-                top: 0;
-                left: 0;
-                z-index: var(--z-fixed);
-                background-color: #fff;
-                box-shadow: 0 1px 4px rgba(146,161,176,.15);
-            }
-
-            /*===== NAV =====*/
-            .nav{
-                height: var(--header-height);
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                font-weight: var(--font-semi);
-            }
-
-            .nav__menu{
-                @media screen and (max-width: 767px){
-                    position: fixed;
-                    top: var(--header-height);
-                    right: -100%;
-                    width: 80%;
-                    height: 100%;
-                    padding: 2rem;
-                    background-color: var(--second-color);
-                    transition: .5s;
-                }
-            }
-
-            .nav__item{
-                margin-bottom: var(--mb-4);
-            }
-
-            .nav__link{
-                position: relative;
-                color: #fff;
-            }
-
-            .nav__link:hover::after{
-                position: absolute;
-                content: '';
-                width: 100%;
-                height: 0.18rem;
-                left: 0;
-                top: 2rem;
-                background-color: var(--first-color);
-            }
-
-            .nav__logo{
-                color: var(--second-color);
-            }
-            .nav__toggle{
-                color: var(--second-color);
-                font-size: 1.5rem;
-                cursor: pointer;
-            }
-
-            /*Active menu*/
-            .active-link::after{
-                position: absolute;
-                content: '';
-                width: 100%;
-                height: 0.18rem;
-                left: 0;
-                top: 2rem;
-                background-color: var(--first-color);
-            }
-
-            /*=== Show menu ===*/
-            .show{
-                right: 0;
-            }
-
-            /*===== HOME =====*/
-            .home{
-                position: relative;
-                row-gap: 5rem;
-                padding: 4rem 0 5rem;
-            }
-
-            .home__data{
-                align-self: center;
-            }
-
-            .home__title{
-                font-size: var(--big-font-size);
-                margin-bottom: var(--mb-5);
-            }
-
-            .home__title-color{
-                color: var(--first-color);
-            }
-
-            .home__social{
-                display: flex;
-                flex-direction: column;
-            }
-
-            .home__social-icon{
-                width: max-content;
-                margin-bottom: var(--mb-2);
-                font-size: 1.5rem;
-                color: var(--second-color);
-            }
-
-            .home__social-icon:hover{
-                color: var(--first-color);
-            }
-
-            .home__img{
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                width: 260px;
-            }
-
-            .home__blob{
-                fill: var(--first-color);
-            }
-
-            .home__blob-img{
-                width: 360px;
-            }
-
-            /*BUTTONS*/
-            .button{
-                display: inline-block;
-                background-color: var(--first-color);
-                color: #fff;
-                padding: .75rem 2.5rem;
-                font-weight: var(--font-semi);
-                border-radius: .5rem; 
-                transition: .3s;
-            }
-
-            .button:hover{
-                box-shadow: 0px 10px 36px rgba(0,0,0,.15);
-            }
-
-            /* ===== ABOUT =====*/
-            .about__container{
-                row-gap: 2rem;
-                text-align: center;
-            }
-
-            .about__subtitle{
-                margin-bottom: var(--mb-2);
-            }
-
-            .about__img{
-                justify-self: center;
-            }
-
-            .about__img img{
-                width: 200px;
-                border-radius: .5rem;
-                background: #ddd;
-                min-height: 200px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            /* ===== SKILLS =====*/
-            .skills__container{
-                row-gap: 2rem;
-                text-align: center;
-            }
-
-            .skills__subtitle{
-                margin-bottom: var(--mb-2);
-            }
-
-            .skills__text{
-                margin-bottom: var(--mb-4);
-            }
-
-            .skills__data{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                position: relative;
-                font-weight: var(--font-semi);
-                padding: .5rem 1rem;
-                margin-bottom: var(--mb-4);
-                border-radius: .5rem;
-                box-shadow: 0px 4px 25px rgba(14, 36, 49, 0.15);
-            }
-
-            .skills__icon{
-                font-size: 2rem;
-                margin-right: var(--mb-2);
-                color: var(--first-color);
-            }
-
-            .skills__names{
-                display: flex;
-                align-items: center;
-            }
-
-            .skills__bar{
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                background-color: var(--first-color);
-                height: .25rem;
-                border-radius: .5rem;
-                z-index: var(--z-back);
-            }
-
-            .skills__html{
-                width: 95%;
-            }
-            .skills__css{
-                width: 85%;
-            }
-            .skills__js{
-                width: 65%;
-            }
-            .skills__ux{
-                width: 85%;
-            }
-
-            .skills__img{
-                border-radius: .5rem;
-                width: 100%;
-                height: 200px;
-                background: #ddd;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            /* ===== WORK =====*/
-            .work__container{
-                row-gap: 2rem;
-            }
-
-            .work__img{
-                box-shadow: 0px 4px 25px rgba(14, 36, 49, 0.15); 
-                border-radius: .5rem;
-                overflow: hidden;
-                display: block;
-                width: 100%;
-                height: 200px;
-                background: #ddd;
-            }
-
-            .work__img img{
-                transition: 1s;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .work__img img:hover{
-                transform: scale(1.1);
-            }
-
-
-            /* ===== FOOTER =====*/
-            .footer{
-                background-color: var(--second-color);
-                color: #fff;
-                text-align: center;
-                font-weight: var(--font-semi);
-                padding: 2rem 0;
-            }
-
-            .footer__title{
-                font-size: 2rem;
-                margin-bottom: var(--mb-4);
-            }
-
-            .footer__social{
-                margin-bottom: var(--mb-4);
-            }
-
-            .footer__icon{
-                font-size: 1.5rem;
-                color: #fff;
-                margin: 0 var(--mb-2);
-            }
-
-            .footer__copy{
-                font-size: var(--smaller-font-size);
-            }
-
-            /* ===== MEDIA QUERIES=====*/
-            @media screen and (max-width: 320px){
-                .home{
-                    row-gap: 2rem;
-                }
-                .home__img{
-                    width: 200px;
-                }
-            }
-
-            @media screen and (min-width: 576px){
-                .home{
-                    padding: 4rem 0 2rem;
-                }
-                .home__social{
-                    padding-top: 0;
-                    padding-bottom: 2.5rem;
-                    flex-direction: row;
-                    align-self: flex-end;
-                }
-                .home__social-icon{
-                    margin-bottom: 0;
-                    margin-right: var(--mb-4);
-                }
-                .home__img{
-                    width: 300px;
-                    bottom: 25%;
-                }
-
-                .about__container{
-                    grid-template-columns: repeat(2,1fr);
-                    align-items: center;
-                    text-align: initial;
-                }
-
-                .skills__container{
-                    grid-template-columns: .7fr;
-                    justify-content: center;
-                    column-gap: 1rem;
-                }
-
-                .work__container{
-                    grid-template-columns: repeat(2,1fr);
-                    column-gap: 2rem;
-                    padding-top: 2rem;
-                }
-
-            @media screen and (min-width: 768px){
-                body{
-                    margin: 0;
-                }
-                .section{
-                    padding-top: 4rem;
-                    padding-bottom: 3rem;
-                }
-
-                .section-title{
-                    margin-bottom: var(--mb-6);
-                }
-
-                .section-title::after{
-                    width: 80px;
-                    top: 3rem;
-                }
-
-                .nav{
-                    height: calc(var(--header-height) + 1.5rem);
-                }
-                .nav__list{
-                    display: flex;
-                    padding-top: 0;
-                }
-                .nav__item{
-                    margin-left: var(--mb-6);
-                    margin-bottom: 0;
-                }
-                .nav__toggle{
-                    display: none;
-                }
-                .nav__link{
-                    color: var(--second-color);
-                }
-
-                .home{
-                    padding: 8rem 0 2rem;
-                }
-                .home__img{
-                    width: 400px;
-                    bottom: 10%;
-                }
-
-                .about__container{
-                   padding-top: 2rem;
-                }
-                .about__img img{
-                    width: 300px;
-                }
-
-                .skills__container{
-                    grid-template-columns: repeat(2,1fr);
-                    column-gap: 2rem;
-                    align-items: center;
-                    text-align: initial;
-                }
-                .work__container{
-                    grid-template-columns: repeat(3,1fr);
-                    column-gap: 2rem;
-                }
-            }
-
-            @media screen and (min-width: 992px){
-                .bd-grid{
-                    margin-left: auto;
-                    margin-right: auto;
-                }
-                .home{
-                    padding: 10rem 0 2rem;
-                }
-                .home__img{
-                    width: 450px;
-                }
-            }
-
-            /* Placeholder styles for missing images */
-            .placeholder {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: white;
-                font-weight: 600;
-                text-align: center;
-            }
-        </style>
-    </head>
-    <body>
-        <!--===== HEADER =====-->
-        <header class="l-header">
-            <nav class="nav bd-grid">
-                <div>
-                    <a href="#" class="nav__logo">Burim</a>
-                </div>
-
-                <div class="nav__menu" id="nav-menu">
-                    <ul class="nav__list">
-                        <li class="nav__item"><a href="#home" class="nav__link active-link">Start</a></li>
-                        <li class="nav__item"><a href="#about" class="nav__link">Über mich</a></li>
-                        <li class="nav__item"><a href="#skills" class="nav__link">Fähigkeiten</a></li>
-                        <li class="nav__item"><a href="#work" class="nav__link">Projekte</a></li>
-                    </ul>
-                </div>
-
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class='bx bx-menu'></i>
-                </div>
-            </nav>
-        </header>
-
-        <main class="l-main">
-            <!--===== HOME =====-->
-            <section class="home bd-grid" id="home">
-                <div class="home__data">
-                    <h1 class="home__title">Hallo,<br>Ich bin <span class="home__title-color">Burim</span><br> IMS Schüler</h1>
-                </div>
-
-                <div class="home__social">
-                    <a href="#" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
-                    <a href="#" class="home__social-icon"><i class='bx bxl-behance' ></i></a>
-                    <a href="#" class="home__social-icon"><i class='bx bxl-github' ></i></a>
-                </div>
-
-                <div class="home__img">
-                    <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <mask id="mask0" mask-type="alpha">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                        </mask>
-                        <g mask="url(#mask0)">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                        </g>
-                    </svg>
-                </div>
-            </section>
-
-            <!--===== ABOUT =====-->
-            <section class="about section " id="about">
-                <h2 class="section-title">Über mich</h2>
-
-                <div class="about__container bd-grid">
-                    <div class="about__img">
-                         <img src="assets/img/about.jpg" alt="Über mich" class="skills__img placeholder" style="width: 100%; height: 200px;">
-                    </div>
-                    
-                    <div>
-                        <h2 class="about__subtitle">Ich bin Burim</h2>
-                        <p class="about__text">Zurzeit besuche ich die Informatikmittelschule an der Kantonsschule am Brühl und suche nach einer Stelle fürs Langzeitpraktikum.</p>           
-                    </div>                                   
-                </div>
-            </section>
-
-            <!--===== SKILLS =====-->
-            <section class="skills section" id="skills">
-                <h2 class="section-title">Skills</h2>
-
-                <div class="skills__container bd-grid">          
-                    <div>
-                        <h2 class="skills__subtitle">Professionelle Fähigkeiten</h2>
-                        <p class="skills__text">Ich habe in der IMS viele Informatikbereiche in Form von Modulen gelernt.</p>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxl-html5 skills__icon'></i>
-                                <span class="skills__name">HTML5</span>
-                            </div>
-                            <div class="skills__bar skills__html"></div>
-                            <div>
-                                <span class="skills__percentage">80%</span>
-                            </div>
-                        </div>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxl-css3 skills__icon'></i>
-                                <span class="skills__name">CSS</span>
-                            </div>
-                            <div class="skills__bar skills__css"></div>
-                            <div>
-                                <span class="skills__percentage">75%</span>
-                            </div>
-                        </div>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxl-javascript skills__icon' ></i>
-                                <span class="skills__name">JAVASCRIPT</span>
-                            </div>
-                            <div class="skills__bar skills__js"></div>
-                            <div>
-                                <span class="skills__percentage">70%</span>
-                            </div>
-                        </div>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxs-paint react__icon'></i>
-                                <span class="skills__name">React</span>
-                            </div>
-                            <div class="skills__bar skills__ux"></div>
-                            <div>
-                                <span class="skills__percentage">65%</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>              
-                        <img src="assets/img/skills.png" alt="Fähigkeiten" class="skills__img placeholder" style="width: 50%; height: 50%;">
-                    </div>
-                </div>
-            </section>
-
-            <!--===== WORK =====-->
-            <section class="work section" id="work">
-                <h2 class="section-title">Projekte</h2>
-
-                <div class="work__container bd-grid">
-                    <a href="#" class="work__img">
-                        <div class="placeholder" style="width: 100%; height: 200px;">Projekt 1</div>
-                    </a>
-                    <a href="#" class="work__img">
-                        <div class="placeholder" style="width: 100%; height: 200px;">Projekt 2</div>
-                    </a>
-                    <a href="#" class="work__img">
-                        <div class="placeholder" style="width: 100%; height: 200px;">Projekt 3</div>
-                    </a>
-                    <a href="#" class="work__img">
-                        <div class="placeholder" style="width: 100%; height: 200px;">Projekt 4</div>
-                    </a>
-                    <a href="#" class="work__img">
-                        <div class="placeholder" style="width: 100%; height: 200px;">Projekt 5</div>
-                    </a>
-                    <a href="#" class="work__img">
-                        <div class="placeholder" style="width: 100%; height: 200px;">Projekt 6</div>
-                    </a>
-                </div>
-            </section>
-
-        <!--===== FOOTER =====-->
-        <footer class="footer">
-            <p class="footer__title">Burim</p>
-            <div class="footer__social">
-                <a href="#" class="footer__icon"><i class='bx bxl-facebook' ></i></a>
-                <a href="#" class="footer__icon"><i class='bx bxl-instagram' ></i></a>
-                <a href="#" class="footer__icon"><i class='bx bxl-twitter' ></i></a>
+<html lang="de" data-theme="light" data-lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Burim Maliki — Portfolio</title>
+  <meta name="description" content="Portfolio von Burim Maliki: angehender Applikationsentwickler an der Informatikmittelschule, auf der Suche nach einem einjährigen Praktikum in Applikationsentwicklung.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f5f2">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101216">
+
+  <script>
+    /* Theme + language before first paint (no flash of wrong mode) */
+    (function () {
+      try {
+        var t = localStorage.getItem('bm-theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+        var l = localStorage.getItem('bm-lang');
+        var lang = l === 'en' ? 'en' : 'de';
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.lang = lang;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.documentElement.lang = 'de';
+      }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================================================================
+       1. DESIGN TOKENS
+       ================================================================ */
+    :root {
+      /* color — light */
+      --bg: #f6f5f2;
+      --bg-elev: #ffffff;
+      --bg-subtle: #edebe6;
+      --text: #16181d;
+      --text-muted: #565e6a;
+      --border: #e3e1db;
+      --border-strong: #d2d0c8;
+      --accent: #2447c8;
+      --accent-strong: #1b379f;
+      --accent-contrast: #ffffff;
+      --accent-soft: rgba(36, 71, 200, 0.09);
+      --focus: #2447c8;
+      --success: #1f7a3d;
+      --success-soft: rgba(31, 122, 61, 0.10);
+      --success-border: rgba(31, 122, 61, 0.35);
+      --danger: #b42318;
+      --danger-soft: rgba(180, 35, 24, 0.08);
+      --danger-border: rgba(180, 35, 24, 0.35);
+
+      /* project tones — RoboFight (dark blue, robotic) */
+      --rf-bg-1: #0e1d42;
+      --rf-bg-2: #0a142e;
+      --rf-border: rgba(255, 255, 255, 0.12);
+      --rf-accent: #8aa8f2;
+      --rf-text: #eaeef8;
+      --rf-muted: rgba(234, 238, 248, 0.74);
+      --rf-panel: rgba(255, 255, 255, 0.045);
+      --rf-panel-border: rgba(255, 255, 255, 0.10);
+
+      /* project tones — Cyberskills (dark green, clean hacker tone) */
+      --cs-bg-1: #0c2419;
+      --cs-bg-2: #081a12;
+      --cs-border: rgba(255, 255, 255, 0.12);
+      --cs-accent: #7dd8a5;
+      --cs-text: #e9f4ed;
+      --cs-muted: rgba(233, 244, 237, 0.74);
+      --cs-panel: rgba(255, 255, 255, 0.045);
+      --cs-panel-border: rgba(255, 255, 255, 0.10);
+
+      /* spacing */
+      --sp-1: 4px;
+      --sp-2: 8px;
+      --sp-3: 12px;
+      --sp-4: 16px;
+      --sp-5: 24px;
+      --sp-6: 32px;
+      --sp-7: 48px;
+      --sp-8: 64px;
+      --sp-9: 96px;
+
+      /* radius — one main, one small */
+      --radius: 14px;
+      --radius-sm: 8px;
+
+      /* shadows */
+      --shadow-sm: 0 1px 2px rgba(17, 20, 26, 0.05);
+      --shadow-md: 0 12px 32px -16px rgba(17, 20, 26, 0.18);
+
+      /* typography */
+      --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --font-display: "Sora", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+      --text-xs: 0.75rem;    /* 12 — eyebrows, meta */
+      --text-sm: 0.875rem;   /* 14 — secondary copy */
+      --text-base: 1rem;     /* 16 — body */
+      --text-lg: 1.125rem;   /* 18 — leads */
+      --text-xl: 1.25rem;    /* 20 — card titles */
+      --text-h3: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+      --text-h2: clamp(1.75rem, 1.45rem + 1.4vw, 2.35rem);
+      --text-h1: clamp(2.6rem, 1.6rem + 4vw, 4.25rem);
+
+      --leading: 1.6;
+      --leading-tight: 1.2;
+
+      /* motion */
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --dur: 200ms;
+
+      /* layout */
+      --header-h: 68px;
+      --container: 1140px;
+      --container-pad: 24px;
+    }
+
+    /* color — dark */
+    [data-theme="dark"] {
+      --bg: #101216;
+      --bg-elev: #171a20;
+      --bg-subtle: #1e222a;
+      --text: #e8eaee;
+      --text-muted: #9aa2ae;
+      --border: #272c35;
+      --border-strong: #343b46;
+      --accent: #7c9cf5;
+      --accent-strong: #93adf8;
+      --accent-contrast: #0d1220;
+      --accent-soft: rgba(124, 156, 245, 0.12);
+      --focus: #7c9cf5;
+      --success: #4caf71;
+      --success-soft: rgba(76, 175, 113, 0.12);
+      --success-border: rgba(76, 175, 113, 0.40);
+      --danger: #f06a5f;
+      --danger-soft: rgba(240, 106, 95, 0.10);
+      --danger-border: rgba(240, 106, 95, 0.40);
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 14px 36px -16px rgba(0, 0, 0, 0.55);
+    }
+
+    /* ================================================================
+       2. BASE
+       ================================================================ */
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      scroll-padding-top: calc(var(--header-h) + 24px);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: var(--text-base);
+      line-height: var(--leading);
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+    }
+
+    img, svg, picture, video { display: block; max-width: 100%; }
+    input, button, textarea, select { font: inherit; color: inherit; }
+    button { cursor: pointer; background: none; border: 0; padding: 0; }
+    ul, ol { list-style: none; padding: 0; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: var(--leading-tight); letter-spacing: -0.015em; }
+
+    ::selection { background: var(--accent-soft); }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+      border-radius: var(--radius-sm);
+    }
+
+    .skip-link {
+      position: fixed;
+      top: -60px;
+      left: 16px;
+      z-index: 200;
+      padding: 10px 16px;
+      background: var(--accent);
+      color: var(--accent-contrast);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      transition: top var(--dur) var(--ease);
+    }
+    .skip-link:focus { top: 12px; }
+
+    /* ================================================================
+       3. TYPOGRAPHIC SCALE & SECTION SYSTEM
+       ================================================================ */
+    .container {
+      width: min(var(--container), 100% - (var(--container-pad) * 2));
+      margin-inline: auto;
+    }
+
+    section { padding-block: var(--sp-9); }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-3);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.7;
+    }
+
+    .section-head { max-width: 720px; margin-bottom: var(--sp-7); }
+    .section-head h2 {
+      font-size: var(--text-h2);
+      margin-top: var(--sp-4);
+    }
+    .section-head .lead {
+      margin-top: var(--sp-4);
+      color: var(--text-muted);
+      font-size: var(--text-lg);
+    }
+
+    .text-link {
+      color: var(--accent);
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-decoration-color: var(--accent);
+      text-underline-offset: 3px;
+      text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+      transition: text-decoration-color var(--dur) var(--ease);
+    }
+    .text-link:hover { text-decoration-color: var(--accent); }
+
+    /* ================================================================
+       4. COMPONENTS — buttons, cards, tags, chips
+       ================================================================ */
+    .icon { width: 20px; height: 20px; flex: none; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      line-height: 1;
+      transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--accent-contrast);
+    }
+    .btn-primary:hover { background: var(--accent-strong); }
+    .btn-primary:active { background: var(--accent-strong); transform: translateY(1px); }
+
+    .btn-secondary {
+      background: var(--bg-elev);
+      border-color: var(--border-strong);
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-secondary:hover { border-color: var(--text-muted); background: var(--bg-subtle); }
+    .btn-secondary:active { transform: translateY(1px); }
+
+    .btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* buttons on dark project surfaces */
+    .btn-on-dark {
+      background: var(--surface-accent, #8aa8f2);
+      color: var(--surface-bg, #0a142e);
+    }
+    .btn-on-dark:hover { filter: brightness(1.08); }
+    .btn-on-dark:active { transform: translateY(1px); }
+
+    .card {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+    }
+
+    /* ================================================================
+       5. HEADER / NAVIGATION
+       ================================================================ */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    }
+    .site-header.is-scrolled {
+      border-bottom-color: var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      height: var(--header-h);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-3);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      margin-right: auto;
+    }
+    .brand:hover { color: var(--text-muted); }
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--text);
+      color: var(--bg);
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+    }
+
+    .site-nav ul {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+    }
+    .nav-link {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+    }
+    .nav-link:hover { color: var(--text); background: var(--bg-subtle); }
+    .nav-link[aria-current="true"] { color: var(--text); background: var(--bg-subtle); }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      padding: 3px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-elev);
+    }
+    .lang-btn {
+      padding: 6px 10px;
+      border-radius: calc(var(--radius-sm) - 3px);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+    }
+    .lang-btn:hover { color: var(--text); }
+    .lang-btn[aria-pressed="true"] {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-elev);
+      color: var(--text-muted);
+      transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    }
+    .icon-btn:hover { color: var(--text); background: var(--bg-subtle); }
+    .icon-btn .icon { width: 18px; height: 18px; }
+
+    [data-theme="light"] .icon-sun { display: none; }
+    [data-theme="dark"] .icon-moon { display: none; }
+
+    .menu-btn { display: none; }
+    .menu-btn .icon-close { display: none; }
+    .menu-btn[aria-expanded="true"] .icon-menu { display: none; }
+    .menu-btn[aria-expanded="true"] .icon-close { display: block; }
+
+    /* ================================================================
+       6. HERO
+       ================================================================ */
+    .hero { padding-top: calc(var(--header-h) + var(--sp-8)); padding-bottom: var(--sp-9); }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: var(--sp-8);
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: var(--text-h1);
+      font-weight: 700;
+      margin-top: var(--sp-5);
+    }
+    .hero h1 .dot { color: var(--accent); }
+
+    .hero-lead {
+      margin-top: var(--sp-5);
+      max-width: 34rem;
+      font-size: var(--text-lg);
+      color: var(--text-muted);
+    }
+    .hero-lead strong {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: var(--text-xl);
+      color: var(--text);
+      margin-bottom: var(--sp-2);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-3);
+      margin-top: var(--sp-6);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-2) var(--sp-5);
+      margin-top: var(--sp-6);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+    .hero-meta span { display: inline-flex; align-items: center; gap: var(--sp-2); }
+    .hero-meta span + span::before { content: "·"; }
+
+    .facts-card { padding: var(--sp-6); }
+    .facts-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--sp-4);
+    }
+    .fact { padding-top: var(--sp-4); }
+    .fact + .fact { border-top: 1px solid var(--border); margin-top: var(--sp-4); }
+    .fact dt {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .fact dd {
+      margin-top: var(--sp-1);
+      font-size: 0.9375rem;
+      font-weight: 500;
+    }
+
+    /* ================================================================
+       7. LINKS SECTION
+       ================================================================ */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-4);
+    }
+
+    .link-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-4);
+      padding: var(--sp-5);
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    }
+    .link-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-strong);
+    }
+
+    .link-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-3);
+    }
+    .link-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-subtle);
+      color: var(--text);
+    }
+    .link-card-arrow {
+      color: var(--text-muted);
+      opacity: 0;
+      transform: translate(-4px, 4px);
+      transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+    }
+    .link-card:hover .link-card-arrow,
+    .link-card:focus-visible .link-card-arrow {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    .link-card h3 { font-size: var(--text-xl); }
+    .link-card p { color: var(--text-muted); font-size: var(--text-sm); }
+    .link-domain {
+      margin-top: auto;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      opacity: 0.85;
+    }
+
+    /* ================================================================
+       8. IMS SECTION
+       ================================================================ */
+    .ims-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: var(--sp-8);
+      align-items: start;
+    }
+    .ims-copy > * + * { margin-top: var(--sp-4); }
+    .ims-copy p { color: var(--text-muted); font-size: var(--text-lg); }
+
+    .ims-card { padding: var(--sp-6); }
+    .ims-card h3 { font-size: var(--text-xl); }
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-2);
+      margin-top: var(--sp-4);
+    }
+    .ims-links {
+      display: grid;
+      gap: var(--sp-3);
+      margin-top: var(--sp-5);
+      padding-top: var(--sp-5);
+      border-top: 1px solid var(--border);
+    }
+    .ims-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-3);
+      padding: var(--sp-4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+    }
+    .ims-link:hover { border-color: var(--border-strong); background: var(--bg-subtle); }
+    .ims-link-title { font-weight: 600; font-size: 0.9375rem; }
+    .ims-link-desc { font-size: var(--text-sm); color: var(--text-muted); }
+    .ims-link .icon { color: var(--text-muted); }
+
+    /* ================================================================
+       9. SKILLS / TABS
+       ================================================================ */
+    .tabs {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      padding: var(--sp-1);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .tab {
+      padding: 10px 18px;
+      border-radius: calc(var(--radius) - 4px);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    }
+    .tab:hover { color: var(--text); }
+    .tab[aria-selected="true"] {
+      color: var(--text);
+      background: var(--bg-elev);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tabpanel { margin-top: var(--sp-6); }
+    .tabpanel[hidden] { display: none; }
+    .tabpanel.is-visible { animation: panel-in 360ms var(--ease) both; }
+    @keyframes panel-in {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-4);
+      padding: 0;
+    }
+    .skill {
+      padding: var(--sp-5);
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+    .skill-index {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+    .skill h3 { margin-top: var(--sp-4); font-size: var(--text-lg); }
+    .skill p { margin-top: var(--sp-2); font-size: var(--text-sm); color: var(--text-muted); }
+
+    .soft-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: var(--sp-6);
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      padding: var(--sp-2) var(--sp-6);
+    }
+    .soft-item {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: var(--sp-3);
+      padding-block: var(--sp-4);
+    }
+    .soft-item + .soft-item { border-top: 1px solid var(--border); }
+    .soft-index {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--accent);
+      padding-top: 4px;
+    }
+    .soft-name { font-weight: 600; font-size: 0.9375rem; }
+    .soft-desc { font-size: var(--text-sm); color: var(--text-muted); margin-top: 2px; }
+
+    /* ================================================================
+       10. PROJECTS
+       ================================================================ */
+    .project {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: var(--sp-7);
+      padding: var(--sp-7);
+      border-radius: var(--radius);
+      border: 1px solid var(--rf-border);
+    }
+    .project + .project { margin-top: var(--sp-5); }
+
+    .project-rf {
+      background: linear-gradient(155deg, var(--rf-bg-1), var(--rf-bg-2));
+      color: var(--rf-text);
+    }
+    .project-cs {
+      background: linear-gradient(155deg, var(--cs-bg-1), var(--cs-bg-2));
+      color: var(--cs-text);
+      border-color: var(--cs-border);
+    }
+
+    .project-tag {
+      display: inline-flex;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--rf-border);
+      color: var(--rf-accent);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .project-cs .project-tag { border-color: var(--cs-border); color: var(--cs-accent); }
+
+    .project h3 {
+      font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.1rem);
+      margin-top: var(--sp-4);
+    }
+    .project-copy > p {
+      margin-top: var(--sp-4);
+      font-size: var(--text-lg);
+      color: var(--rf-muted);
+    }
+    .project-cs .project-copy > p { color: var(--cs-muted); }
+
+    .fact-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-2);
+      margin-top: var(--sp-5);
+    }
+    .fact-chip {
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--rf-border);
+      background: var(--rf-panel);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.04em;
+      color: var(--rf-text);
+    }
+    .project-cs .fact-chip { border-color: var(--cs-border); background: var(--cs-panel); color: var(--cs-text); }
+
+    .project-cta {
+      display: inline-flex;
+      margin-top: var(--sp-6);
+      padding: 12px 22px;
+      border-radius: var(--radius-sm);
+      background: var(--rf-accent);
+      color: var(--rf-bg-2);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      gap: 10px;
+      align-items: center;
+      transition: filter var(--dur) var(--ease), transform var(--dur) var(--ease);
+    }
+    .project-cta:hover { filter: brightness(1.1); }
+    .project-cta:active { transform: translateY(1px); }
+    .project-cs .project-cta { background: var(--cs-accent); color: var(--cs-bg-2); }
+
+    /* project visual panels */
+    .project-visual {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-4);
+      padding: var(--sp-5);
+      background: var(--rf-panel);
+      border: 1px solid var(--rf-panel-border);
+      border-radius: var(--radius);
+    }
+    .project-cs .project-visual { background: var(--cs-panel); border-color: var(--cs-panel-border); }
+
+    .visual-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rf-muted);
+    }
+    .project-cs .visual-label { color: var(--cs-muted); }
+
+    .stat-row {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+    }
+    .stat-name {
+      width: 104px;
+      flex: none;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--rf-text);
+    }
+    .project-cs .stat-name { color: var(--cs-text); }
+    .stat-track {
+      flex: 1;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+    }
+    .stat-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--rf-accent);
+    }
+    .project-cs .stat-fill { background: var(--cs-accent); }
+    .stat-value {
+      width: 32px;
+      flex: none;
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--rf-muted);
+    }
+    .project-cs .stat-value { color: var(--cs-muted); }
+
+    .formula {
+      padding: var(--sp-4);
+      border: 1px dashed var(--rf-panel-border);
+      border-radius: var(--radius-sm);
+      background: rgba(0, 0, 0, 0.16);
+    }
+    .project-cs .formula { border-color: var(--cs-panel-border); }
+    .formula-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rf-muted);
+    }
+    .project-cs .formula-label { color: var(--cs-muted); }
+    .formula-code {
+      display: block;
+      margin-top: var(--sp-2);
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      color: var(--rf-text);
+    }
+    .project-cs .formula-code { color: var(--cs-text); }
+
+    .diagram-caption {
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--rf-muted);
+    }
+    .project-cs .diagram-caption { color: var(--cs-muted); }
+
+    .type-diagram .diagram-edge {
+      stroke: var(--rf-accent);
+      stroke-width: 1.5;
+      opacity: 0.85;
+    }
+    .type-diagram .diagram-node {
+      fill: var(--rf-bg-1);
+      stroke: var(--rf-accent);
+      stroke-width: 1.5;
+    }
+    .type-diagram .diagram-node-text {
+      fill: var(--rf-text);
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+    .tree-diagram .tree-line { stroke: rgba(255, 255, 255, 0.18); stroke-width: 1.2; }
+    .tree-diagram .tree-node { fill: var(--cs-panel); stroke: var(--cs-accent); stroke-width: 1.4; }
+    .tree-diagram .tree-root { fill: var(--cs-accent); stroke: none; }
+    .tree-diagram .tree-leaf { fill: var(--cs-accent); opacity: 0.55; }
+    .tree-diagram .tree-node-text {
+      fill: var(--cs-text);
+      font-family: var(--font-sans);
+      font-size: 10.5px;
+      font-weight: 500;
+    }
+    .tree-diagram .tree-root-text {
+      fill: var(--cs-bg-2);
+      font-family: var(--font-sans);
+      font-size: 10.5px;
+      font-weight: 700;
+    }
+
+    .project-dl { margin-top: var(--sp-5); display: grid; gap: var(--sp-4); }
+    .project-dl dt {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cs-accent);
+    }
+    .project-dl dd { margin-top: var(--sp-1); font-size: 0.9375rem; color: var(--cs-muted); }
+
+    /* ================================================================
+       11. CONTACT / FORM
+       ================================================================ */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: var(--sp-8);
+      align-items: start;
+    }
+    .contact-copy p { color: var(--text-muted); font-size: var(--text-lg); margin-top: var(--sp-4); max-width: 32rem; }
+    .contact-copy .note {
+      margin-top: var(--sp-5);
+      font-size: var(--text-sm);
+    }
+
+    .contact-form {
+      padding: var(--sp-6);
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+    .field { margin-bottom: var(--sp-5); }
+    .field label {
+      display: block;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: var(--sp-2);
+    }
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background-color var(--dur) var(--ease);
+    }
+    .field textarea { resize: vertical; min-height: 140px; }
+    .field input:hover,
+    .field textarea:hover { border-color: var(--text-muted); }
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+    .field input.is-invalid,
+    .field textarea.is-invalid {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 3px var(--danger-soft);
+    }
+    .field-error {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: var(--sp-2);
+      font-size: var(--text-sm);
+      color: var(--danger);
+    }
+    .field-error .icon { width: 14px; height: 14px; }
+
+    .btn-submit { width: 100%; padding: 14px 20px; font-size: 1rem; }
+    .spinner {
+      width: 16px;
+      height: 16px;
+      flex: none;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      border-top-color: currentColor;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .form-banner {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+      padding: var(--sp-4);
+      border-radius: var(--radius-sm);
+      border: 1px solid;
+      margin-bottom: var(--sp-5);
+      animation: panel-in 300ms var(--ease) both;
+    }
+    .form-banner[hidden] { display: none; }
+    .form-banner.is-success {
+      background: var(--success-soft);
+      border-color: var(--success-border);
+      color: var(--success);
+    }
+    .form-banner.is-error {
+      background: var(--danger-soft);
+      border-color: var(--danger-border);
+      color: var(--danger);
+    }
+    .banner-text { flex: 1; }
+    .banner-title { font-weight: 600; font-size: 0.9375rem; }
+    .banner-body { font-size: var(--text-sm); opacity: 0.9; margin-top: 2px; }
+    .banner-close {
+      display: inline-flex;
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      color: inherit;
+      opacity: 0.7;
+    }
+    .banner-close:hover { opacity: 1; }
+    .banner-close .icon { width: 16px; height: 16px; }
+
+    /* ================================================================
+       12. FOOTER
+       ================================================================ */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding-block: var(--sp-7);
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--sp-6);
+    }
+    .footer-brand { display: flex; align-items: center; gap: var(--sp-3); font-family: var(--font-display); font-weight: 600; }
+    .footer-tagline {
+      margin-top: var(--sp-2);
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      max-width: 26rem;
+    }
+    .footer-links { display: flex; gap: var(--sp-4); }
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 8px 4px;
+      transition: color var(--dur) var(--ease);
+    }
+    .footer-link:hover { color: var(--text); }
+    .footer-link .icon { width: 16px; height: 16px; }
+    .footer-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-2) var(--sp-5);
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+    }
+
+    /* ================================================================
+       13. BACK TO TOP
+       ================================================================ */
+    .to-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 90;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid var(--border-strong);
+      background: var(--bg-elev);
+      color: var(--text);
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility var(--dur) var(--ease), background-color var(--dur) var(--ease);
+    }
+    .to-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+    .to-top:hover { background: var(--bg-subtle); }
+
+    /* ================================================================
+       14. REVEAL & MOTION
+       ================================================================ */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 520ms var(--ease), transform 520ms var(--ease);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+    [data-reveal].is-visible { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      [data-reveal] { opacity: 1; transform: none; }
+    }
+
+    /* ================================================================
+       15. RESPONSIVE
+       ================================================================ */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; gap: var(--sp-6); }
+      .project { grid-template-columns: 1fr; }
+      .skill-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 880px) {
+      .menu-btn { display: inline-flex; }
+
+      .site-nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        background: var(--bg-elev);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-md);
+        padding: var(--sp-3) var(--container-pad) var(--sp-5);
+      }
+      .site-nav.open { display: block; animation: nav-in 240ms var(--ease) both; }
+      @keyframes nav-in {
+        from { opacity: 0; transform: translateY(-6px); }
+        to { opacity: 1; transform: none; }
+      }
+      .site-nav ul { flex-direction: column; align-items: stretch; gap: var(--sp-1); }
+      .nav-link { padding: 12px; font-size: 1rem; }
+    }
+
+    @media (max-width: 760px) {
+      :root { --container-pad: 20px; }
+      section { padding-block: var(--sp-8); }
+      .links-grid { grid-template-columns: 1fr; }
+      .ims-grid { grid-template-columns: 1fr; gap: var(--sp-6); }
+      .skill-grid { grid-template-columns: 1fr; }
+      .soft-list { grid-template-columns: 1fr; padding-inline: var(--sp-5); }
+      .contact-grid { grid-template-columns: 1fr; gap: var(--sp-6); }
+      .project { padding: var(--sp-5); }
+      .project-visual { padding: var(--sp-4); }
+      .footer-inner { flex-direction: column; }
+      .footer-links { flex-direction: column; gap: 0; }
+      .hero-meta { gap: var(--sp-2) var(--sp-4); }
+    }
+
+    @media (max-width: 560px) {
+      .brand-name { display: none; }
+      .lang-btn { padding: 6px 8px; }
+      .facts-card { padding: var(--sp-5); }
+      .contact-form { padding: var(--sp-5); }
+      .tabs { width: 100%; }
+      .tab { flex: 1 1 auto; padding: 10px 12px; font-size: 0.8125rem; }
+    }
+  </style>
+  <noscript>
+    <style>[data-reveal] { opacity: 1; transform: none; }</style>
+  </noscript>
+</head>
+
+<body>
+  <a class="skip-link" href="#start" data-i18n="a11y.skip">Zum Inhalt springen</a>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#start" data-i18n-aria="nav.brandAria" aria-label="Burim Maliki — zum Seitenanfang">
+        <span class="brand-mark" aria-hidden="true">BM</span>
+        <span class="brand-name">Burim&nbsp;Maliki</span>
+      </a>
+
+      <nav class="site-nav" id="site-nav" aria-label="Hauptnavigation" data-i18n-aria="nav.label">
+        <ul>
+          <li><a class="nav-link" href="#start" data-i18n="nav.start">Start</a></li>
+          <li><a class="nav-link" href="#links" data-i18n="nav.links">Links</a></li>
+          <li><a class="nav-link" href="#ims" data-i18n="nav.ims">IMS</a></li>
+          <li><a class="nav-link" href="#skills" data-i18n="nav.skills">Skills</a></li>
+          <li><a class="nav-link" href="#projekte" data-i18n="nav.projects">Projekte</a></li>
+          <li><a class="nav-link" href="#kontakt" data-i18n="nav.contact">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-controls">
+        <div class="lang-switch" role="group" aria-label="Sprache / Language">
+          <button type="button" class="lang-btn" data-lang="de" aria-pressed="true">DE</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Dunkles Design aktivieren">
+          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+          </svg>
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2"/>
+            <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M19.1 4.9l-1.6 1.6M6.5 17.5l-1.6 1.6"/>
+          </svg>
+        </button>
+        <button type="button" class="icon-btn menu-btn" id="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menü öffnen">
+          <svg class="icon icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+          <svg class="icon icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ================= HERO ================= -->
+    <section id="start" class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy" data-reveal>
+          <p class="eyebrow" data-i18n="hero.eyebrow">Portfolio · Informatikmittelschule</p>
+          <h1 id="hero-title">Burim&nbsp;Maliki<span class="dot">.</span></h1>
+          <p class="hero-lead">
+            <strong data-i18n="hero.leadStrong">Angehender Applikationsentwickler.</strong>
+            <span data-i18n="hero.lead">Ich besuche die Informatikmittelschule (IMS) und suche ein einjähriges Praktikum in Applikationsentwicklung. Mein Fokus: Web und Fullstack. Mein Interesse: Sicherheit.</span>
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://www.linkedin.com/in/burim-maliki-932824349/" target="_blank" rel="noopener noreferrer" data-i18n-aria="hero.linkedinAria" aria-label="LinkedIn-Profil öffnen (neuer Tab)">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/>
+              </svg>
+              <span data-i18n="hero.ctaLinkedin">LinkedIn</span>
+            </a>
+            <a class="btn btn-secondary" href="https://github.com/BurimMaliki" target="_blank" rel="noopener noreferrer" data-i18n-aria="hero.githubAria" aria-label="GitHub-Profil öffnen (neuer Tab)">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
+              </svg>
+              <span data-i18n="hero.ctaGithub">GitHub</span>
+            </a>
+          </div>
+          <p class="hero-meta" aria-hidden="true">
+            <span data-i18n="hero.meta1">Informatikmittelschule (IMS)</span>
+            <span data-i18n="hero.meta2">Applikationsentwicklung</span>
+            <span data-i18n="hero.meta3">Web · Fullstack · Security</span>
+          </p>
+        </div>
+
+        <aside class="facts-card card" data-reveal style="--reveal-delay: 120ms" aria-label="Auf einen Blick" data-i18n-aria="hero.factsAria">
+          <p class="facts-title" data-i18n="hero.factsTitle">Auf einen Blick</p>
+          <dl class="facts">
+            <div class="fact">
+              <dt data-i18n="hero.fStatusLabel">Status</dt>
+              <dd data-i18n="hero.fStatus">Auf der Suche nach dem Praktikumsjahr</dd>
             </div>
-            <p class="footer__copy">&#169; Alle Rechte vorbehalten</p>
-        </footer>
+            <div class="fact">
+              <dt data-i18n="hero.fEducationLabel">Ausbildung</dt>
+              <dd data-i18n="hero.fEducation">Informatikmittelschule (IMS)</dd>
+            </div>
+            <div class="fact">
+              <dt data-i18n="hero.fFocusLabel">Schwerpunkt</dt>
+              <dd data-i18n="hero.fFocus">Applikationsentwicklung</dd>
+            </div>
+            <div class="fact">
+              <dt data-i18n="hero.fInterestLabel">Interessen</dt>
+              <dd data-i18n="hero.fInterest">Web · Fullstack · Security</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
 
-        <script>
-            /*===== MENU SHOW =====*/ 
-            const showMenu = (toggleId, navId) =>{
-                const toggle = document.getElementById(toggleId),
-                nav = document.getElementById(navId)
+    <!-- ================= LINKS ================= -->
+    <section id="links" aria-labelledby="links-title">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow" data-i18n="links.eyebrow">01 · Profile &amp; Projekte</p>
+          <h2 id="links-title" data-i18n="links.title">Wichtige Links</h2>
+          <p class="lead" data-i18n="links.lead">Alle relevanten Profile und Projekte an einem Ort.</p>
+        </div>
 
-                if(toggle && nav){
-                    toggle.addEventListener('click', ()=>{
-                        nav.classList.toggle('show')
-                    })
-                }
+        <div class="links-grid">
+          <a class="link-card" href="https://github.com/BurimMaliki" target="_blank" rel="noopener noreferrer" data-reveal data-i18n-aria="links.githubAria" aria-label="GitHub öffnen (neuer Tab)">
+            <span class="link-card-top">
+              <span class="link-icon" aria-hidden="true">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              </span>
+              <svg class="icon link-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </span>
+            <h3 data-i18n="links.githubTitle">GitHub</h3>
+            <p data-i18n="links.githubDesc">Code, Projekte und Experimente.</p>
+            <span class="link-domain">github.com/BurimMaliki</span>
+          </a>
+
+          <a class="link-card" href="https://www.linkedin.com/in/burim-maliki-932824349/" target="_blank" rel="noopener noreferrer" data-reveal style="--reveal-delay: 60ms" data-i18n-aria="links.linkedinAria" aria-label="LinkedIn öffnen (neuer Tab)">
+            <span class="link-card-top">
+              <span class="link-icon" aria-hidden="true">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+              </span>
+              <svg class="icon link-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </span>
+            <h3 data-i18n="links.linkedinTitle">LinkedIn</h3>
+            <p data-i18n="links.linkedinDesc">Profil, Netzwerk und Kontaktaufnahme.</p>
+            <span class="link-domain">linkedin.com/in/burim-maliki-932824349</span>
+          </a>
+
+          <a class="link-card" href="https://www.cyberskills.li/robot" target="_blank" rel="noopener noreferrer" data-reveal style="--reveal-delay: 120ms" data-i18n-aria="links.robofightAria" aria-label="RoboFight öffnen (neuer Tab)">
+            <span class="link-card-top">
+              <span class="link-icon" aria-hidden="true">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 6H8.5M12 6h3.5"/><rect x="4.5" y="8.5" width="15" height="10.5" rx="2.5"/><path d="M9.6 12.6h.01M14.4 12.6h.01M2.5 13h2M19.5 13h2"/></svg>
+              </span>
+              <svg class="icon link-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </span>
+            <h3 data-i18n="links.robofightTitle">RoboFight</h3>
+            <p data-i18n="links.robofightDesc">Strategie-Spiel mit Robotern — Stärke, Tempo, Robustheit.</p>
+            <span class="link-domain">cyberskills.li/robot</span>
+          </a>
+
+          <a class="link-card" href="https://www.cyberskills.li/" target="_blank" rel="noopener noreferrer" data-reveal style="--reveal-delay: 180ms" data-i18n-aria="links.cyberskillsAria" aria-label="Cyberskills öffnen (neuer Tab)">
+            <span class="link-card-top">
+              <span class="link-icon" aria-hidden="true">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="4" r="1.7"/><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/><circle cx="4" cy="19.5" r="1.7"/><circle cx="9" cy="19.5" r="1.7"/><circle cx="15" cy="19.5" r="1.7"/><circle cx="20" cy="19.5" r="1.7"/><path d="M11.4 5.4L6 10.6M12 5.6l.3 4.7M18 10.6l-5.2-5M4.9 13.3l-.3 4.5M9.4 18.2l-3.4-3.2M14.6 18.2l3.4-3.2M19.1 17.8l-.3-4.5"/></svg>
+              </span>
+              <svg class="icon link-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </span>
+            <h3 data-i18n="links.cyberskillsTitle">Cyberskills</h3>
+            <p data-i18n="links.cyberskillsDesc">Lernkonzept für Cybersicherheit mit eigenem Skill-Tree.</p>
+            <span class="link-domain">cyberskills.li</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= IMS ================= -->
+    <section id="ims" aria-labelledby="ims-title">
+      <div class="container ims-grid">
+        <div class="ims-copy" data-reveal>
+          <p class="eyebrow" data-i18n="ims.eyebrow">02 · Bildungsweg</p>
+          <h2 id="ims-title" data-i18n="ims.title">Informatikmittelschule (IMS)</h2>
+          <p data-i18n="ims.p1">Die Informatikmittelschule (IMS) ist ein vierjähriger Bildungsgang in der Schweiz: drei Jahre Schule, ein Jahr Praktikum — mit Abschluss eidgenössisches Fähigkeitszeugnis (EFZ) als Applikationsentwickler:in plus Berufsmaturität.</p>
+          <p data-i18n-html="ims.p2">Der Unterricht verbindet Allgemeinbildung mit Informatik — von Programmierung und Webentwicklung über Datenbanken und Netzwerke bis zu Projektmanagement. Welche Module zum EFZ führen, zeigt der offizielle <a class="text-link" href="https://www.modulbaukasten.ch/" target="_blank" rel="noopener noreferrer">Modulbaukasten</a>. Angeboten wird die IMS unter anderem an der <a class="text-link" href="https://www.ksb-sg.ch/ims" target="_blank" rel="noopener noreferrer">Kanti am Brühl (KSB)</a> in St. Gallen.</p>
+        </div>
+
+        <aside class="ims-card card" data-reveal style="--reveal-delay: 120ms" aria-label="Lerninhalte der IMS" data-i18n-aria="ims.cardAria">
+          <h3 data-i18n="ims.learnTitle">Was man an der IMS lernt</h3>
+          <ul class="chip-list">
+            <li class="chip" data-i18n="ims.chip1">Programmierung</li>
+            <li class="chip" data-i18n="ims.chip2">Webentwicklung</li>
+            <li class="chip" data-i18n="ims.chip3">Datenbanken</li>
+            <li class="chip" data-i18n="ims.chip4">Netzwerke &amp; Betriebssysteme</li>
+            <li class="chip" data-i18n="ims.chip5">Projektmanagement</li>
+            <li class="chip" data-i18n="ims.chip6">Agile Methoden</li>
+            <li class="chip" data-i18n="ims.chip7">Mathematik &amp; Naturwissenschaften</li>
+            <li class="chip" data-i18n="ims.chip8">Sprachen &amp; Wirtschaft</li>
+            <li class="chip" data-i18n="ims.chip9">Berufsmaturität</li>
+          </ul>
+          <div class="ims-links">
+            <a class="ims-link" href="https://www.modulbaukasten.ch/" target="_blank" rel="noopener noreferrer" data-i18n-aria="ims.modulesAria" aria-label="Modulbaukasten öffnen (neuer Tab)">
+              <span>
+                <span class="ims-link-title" data-i18n="ims.modulesTitle">Modulbaukasten</span><br>
+                <span class="ims-link-desc" data-i18n="ims.modulesDesc">Offizielle Modulübersicht der IMS</span>
+              </span>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+            <a class="ims-link" href="https://www.ksb-sg.ch/ims" target="_blank" rel="noopener noreferrer" data-i18n-aria="ims.ksbAria" aria-label="Kanti am Brühl öffnen (neuer Tab)">
+              <span>
+                <span class="ims-link-title" data-i18n="ims.ksbTitle">Kanti am Brühl (KSB)</span><br>
+                <span class="ims-link-desc" data-i18n="ims.ksbDesc">Informatikmittelschule in St. Gallen</span>
+              </span>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow" data-i18n="skills.eyebrow">03 · Kompetenzen</p>
+          <h2 id="skills-title" data-i18n="skills.title">Skills</h2>
+          <p class="lead" data-i18n-html="skills.lead">Die IMS hat mir eine solide Grundlage gegeben — von den Grundlagen der Programmierung bis zu Datenbanken, Netzwerken und Webentwicklung. Die genauen Inhalte sind im <a class="text-link" href="https://www.modulbaukasten.ch/" target="_blank" rel="noopener noreferrer">Modulbaukasten</a> dokumentiert.</p>
+        </div>
+
+        <div data-reveal>
+          <div class="tabs" role="tablist" aria-label="Skill-Kategorien" data-i18n-aria="skills.tabsAria">
+            <button type="button" class="tab" role="tab" id="tab-langs" aria-controls="panel-langs" aria-selected="true" tabindex="0" data-i18n="skills.tab1">Programmiersprachen</button>
+            <button type="button" class="tab" role="tab" id="tab-areas" aria-controls="panel-areas" aria-selected="false" tabindex="-1" data-i18n="skills.tab2">Anwendungsbereiche</button>
+            <button type="button" class="tab" role="tab" id="tab-soft" aria-controls="panel-soft" aria-selected="false" tabindex="-1" data-i18n="skills.tab3">Soft Skills</button>
+          </div>
+
+          <div class="tabpanel" id="panel-langs" role="tabpanel" aria-labelledby="tab-langs" tabindex="0">
+            <ul class="skill-grid">
+              <li class="skill">
+                <span class="skill-index">01</span>
+                <h3 data-i18n="skills.langJs">JavaScript</h3>
+                <p data-i18n="skills.langJsDesc">Webanwendungen &amp; interaktive Interfaces</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">02</span>
+                <h3 data-i18n="skills.langHtml">HTML</h3>
+                <p data-i18n="skills.langHtmlDesc">Semantisches Markup &amp; zugängliche Struktur</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">03</span>
+                <h3 data-i18n="skills.langCss">CSS</h3>
+                <p data-i18n="skills.langCssDesc">Layout, Responsive Design &amp; Design-Systeme</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">04</span>
+                <h3 data-i18n="skills.langC">C</h3>
+                <p data-i18n="skills.langCDesc">Systemnahe Grundlagen &amp; Speicherverwaltung</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">05</span>
+                <h3 data-i18n="skills.langCpp">C++</h3>
+                <p data-i18n="skills.langCppDesc">Objektorientierte Programmierung</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">06</span>
+                <h3 data-i18n="skills.langJava">Java</h3>
+                <p data-i18n="skills.langJavaDesc">Stark typisierte Anwendungen</p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="tabpanel" id="panel-areas" role="tabpanel" aria-labelledby="tab-areas" tabindex="0" hidden>
+            <ul class="skill-grid">
+              <li class="skill">
+                <span class="skill-index">01</span>
+                <h3 data-i18n="skills.areaFrontend">Frontend</h3>
+                <p data-i18n="skills.areaFrontendDesc">Interfaces, Usability &amp; Barrierefreiheit</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">02</span>
+                <h3 data-i18n="skills.areaBackend">Backend</h3>
+                <p data-i18n="skills.areaBackendDesc">APIs, Services &amp; Geschäftslogik</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">03</span>
+                <h3 data-i18n="skills.areaFullstack">Fullstack</h3>
+                <p data-i18n="skills.areaFullstackDesc">Von der Datenbank bis zum UI</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">04</span>
+                <h3 data-i18n="skills.areaSql">SQL &amp; NoSQL Datenbanken</h3>
+                <p data-i18n="skills.areaSqlDesc">Relationale &amp; dokumentenbasierte Systeme</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">05</span>
+                <h3 data-i18n="skills.areaContainer">Container</h3>
+                <p data-i18n="skills.areaContainerDesc">Docker &amp; isolierte Laufzeitumgebungen</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">06</span>
+                <h3 data-i18n="skills.areaAi">AI Skills</h3>
+                <p data-i18n="skills.areaAiDesc">KI-gestützte Tools &amp; Workflows</p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="tabpanel" id="panel-soft" role="tabpanel" aria-labelledby="tab-soft" tabindex="0" hidden>
+            <ul class="soft-list">
+              <li class="soft-item">
+                <span class="soft-index">01</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft1">Teamfähigkeit</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft1Desc">Gemeinsam Lösungen erarbeiten</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">02</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft2">Überzeugungsfähigkeit</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft2Desc">Ideen klar und sachlich vertreten</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">03</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft3">Feedback geben &amp; annehmen</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft3Desc">Offen für konstruktive Kritik</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">04</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft4">Empathie</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft4Desc">Perspektiven anderer verstehen</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">05</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft5">Toleranz</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft5Desc">Unterschiedliche Sichtweisen respektieren</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">06</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft6">Neugier</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft6Desc">Neues verstehen und ausprobieren</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">07</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft7">Strategisches Denken</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft7Desc">Probleme in Schritte zerlegen</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">08</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft8">Geduld</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft8Desc">Dranbleiben bei komplexen Aufgaben</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">09</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft9">Verantwortungsübernahme</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft9Desc">Für Ergebnisse einstehen</span>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section id="projekte" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow" data-i18n="projects.eyebrow">04 · Arbeit</p>
+          <h2 id="projects-title" data-i18n="projects.title">Projekte</h2>
+          <p class="lead" data-i18n="projects.lead">Zwei Projekte, zwei Ansätze: ein spielbares Strategie-Spiel und das Konzept für eine Lernplattform.</p>
+        </div>
+
+        <!-- RoboFight -->
+        <article class="project project-rf" data-reveal aria-labelledby="rf-title">
+          <div class="project-copy">
+            <span class="project-tag" data-i18n="projects.rfTag">Spiel · Web</span>
+            <h3 id="rf-title" data-i18n="projects.rfTitle">RoboFight</h3>
+            <p data-i18n="projects.rfDesc">Zwei Spieler bauen Roboter aus drei Werten — Stärke, Tempo und Robustheit — und lassen sie gegeneinander antreten. Wie bei Schere, Stein, Papier kontert jeder Wert einen anderen; eine spezielle Kampfformel entscheidet den Kampf.</p>
+            <ul class="fact-chips" aria-label="Eigenschaften von RoboFight" data-i18n-aria="projects.rfChipsAria">
+              <li class="fact-chip" data-i18n="projects.rfChip1">2 Spieler</li>
+              <li class="fact-chip" data-i18n="projects.rfChip2">Stärke · Tempo · Robustheit</li>
+              <li class="fact-chip" data-i18n="projects.rfChip3">Typ-System</li>
+              <li class="fact-chip" data-i18n="projects.rfChip4">Kampfformel</li>
+            </ul>
+            <a class="project-cta" href="https://www.cyberskills.li/robot" target="_blank" rel="noopener noreferrer" data-i18n-aria="projects.rfCtaAria" aria-label="RoboFight ansehen (neuer Tab)">
+              <span data-i18n="projects.rfCta">RoboFight ansehen</span>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+
+          <div class="project-visual" aria-label="RoboFight Mechanik" data-i18n-aria="projects.rfVisualAria">
+            <p class="visual-label" data-i18n="projects.rfStatsTitle">Roboter-Werte</p>
+            <div class="stat-row">
+              <span class="stat-name" data-i18n="projects.rfStatStrength">Stärke</span>
+              <span class="stat-track" aria-hidden="true"><span class="stat-fill" style="width: 80%"></span></span>
+              <span class="stat-value" aria-hidden="true">8</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-name" data-i18n="projects.rfStatSpeed">Tempo</span>
+              <span class="stat-track" aria-hidden="true"><span class="stat-fill" style="width: 70%"></span></span>
+              <span class="stat-value" aria-hidden="true">7</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-name" data-i18n="projects.rfStatDurability">Robustheit</span>
+              <span class="stat-track" aria-hidden="true"><span class="stat-fill" style="width: 60%"></span></span>
+              <span class="stat-value" aria-hidden="true">6</span>
+            </div>
+
+            <svg class="type-diagram" viewBox="0 0 320 190" role="img" aria-labelledby="rf-diagram-title" aria-hidden="false">
+              <title id="rf-diagram-title" data-i18n="projects.rfDiagramAria">Typ-System von RoboFight: Stärke schlägt Tempo, Tempo schlägt Robustheit, Robustheit schlägt Stärke.</title>
+              <defs>
+                <marker id="rf-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                  <path d="M0 0L10 5L0 10z" fill="var(--rf-accent)"/>
+                </marker>
+              </defs>
+              <path class="diagram-edge" d="M157 48 L62 154" marker-end="url(#rf-arrow)"/>
+              <path class="diagram-edge" d="M78 172 L242 172" marker-end="url(#rf-arrow)"/>
+              <path class="diagram-edge" d="M260 150 L166 50" marker-end="url(#rf-arrow)"/>
+              <circle class="diagram-node" cx="160" cy="38" r="22"/>
+              <text class="diagram-node-text" x="160" y="43" text-anchor="middle" data-i18n="projects.rfStatStrength">Stärke</text>
+              <circle class="diagram-node" cx="52" cy="164" r="22"/>
+              <text class="diagram-node-text" x="52" y="169" text-anchor="middle" data-i18n="projects.rfStatSpeed">Tempo</text>
+              <circle class="diagram-node" cx="268" cy="164" r="22"/>
+              <text class="diagram-node-text" x="268" y="169" text-anchor="middle" data-i18n="projects.rfStatDurability">Robustheit</text>
+            </svg>
+            <p class="diagram-caption" data-i18n="projects.rfDiagramCaption">Typ-System: schlägt im Kreis</p>
+
+            <div class="formula">
+              <p class="formula-label" data-i18n="projects.rfFormulaCaption">Kampfformel (vereinfacht)</p>
+              <code class="formula-code" data-i18n="projects.rfFormula">Schaden = Stärke × Typ-Faktor − Robustheit</code>
+            </div>
+          </div>
+        </article>
+
+        <!-- Cyberskills -->
+        <article class="project project-cs" data-reveal aria-labelledby="cs-title">
+          <div class="project-copy">
+            <span class="project-tag" data-i18n="projects.csTag">Konzept · Blueprint</span>
+            <h3 id="cs-title" data-i18n="projects.csTitle">Cyberskills</h3>
+            <p data-i18n="projects.csDesc">Das Konzept für eine Lernplattform, die Cybersicherheit verständlich macht: eine klar definierte Zielgruppe, messbare Lernziele und ein eigenes Skill-Tree-System, das den Lernfortschritt sichtbar macht.</p>
+            <ul class="fact-chips" aria-label="Eigenschaften von Cyberskills" data-i18n-aria="projects.csChipsAria">
+              <li class="fact-chip" data-i18n="projects.csChip1">Zielgruppe definiert</li>
+              <li class="fact-chip" data-i18n="projects.csChip2">Messbare Lernziele</li>
+              <li class="fact-chip" data-i18n="projects.csChip3">Skill-Tree</li>
+              <li class="fact-chip" data-i18n="projects.csChip4">Konzeptphase</li>
+            </ul>
+            <dl class="project-dl">
+              <div>
+                <dt data-i18n="projects.csAudienceLabel">Zielgruppe</dt>
+                <dd data-i18n="projects.csAudience">Jugendliche und Einsteiger:innen, die verstehen wollen, wie Angriffe funktionieren und wie man sich schützt.</dd>
+              </div>
+              <div>
+                <dt data-i18n="projects.csOutcomesLabel">Lernziele</dt>
+                <dd data-i18n="projects.csOutcomes">Netzwerke, Angriffsmethoden und Verteidigung im Alltag verstehen und anwenden.</dd>
+              </div>
+              <div>
+                <dt data-i18n="projects.csTreeLabel">Skill-Tree-System</dt>
+                <dd data-i18n="projects.csTree">Ein eigener Fähigkeiten-Baum, der Fortschritt sichtbar macht und motiviert.</dd>
+              </div>
+            </dl>
+            <a class="project-cta" href="https://www.cyberskills.li/" target="_blank" rel="noopener noreferrer" data-i18n-aria="projects.csCtaAria" aria-label="Cyberskills ansehen (neuer Tab)">
+              <span data-i18n="projects.csCta">Cyberskills ansehen</span>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+
+          <div class="project-visual" aria-label="Cyberskills Skill-Tree" data-i18n-aria="projects.csVisualAria">
+            <p class="visual-label" data-i18n="projects.csTreeTitle">Skill-Tree-System</p>
+            <svg class="tree-diagram" viewBox="0 0 320 200" role="img" aria-labelledby="cs-diagram-title" aria-hidden="false">
+              <title id="cs-diagram-title" data-i18n="projects.csDiagramAria">Skill-Tree von Cyberskills: vom Start-Modul über Grundlagen, Netzwerke, Angriffe und Verteidigung.</title>
+              <path class="tree-line" d="M160 40 L52 96"/>
+              <path class="tree-line" d="M160 40 L124 96"/>
+              <path class="tree-line" d="M160 40 L196 96"/>
+              <path class="tree-line" d="M160 40 L268 96"/>
+              <path class="tree-line" d="M52 106 L30 168"/>
+              <path class="tree-line" d="M52 106 L74 168"/>
+              <path class="tree-line" d="M124 106 L102 168"/>
+              <path class="tree-line" d="M124 106 L146 168"/>
+              <path class="tree-line" d="M196 106 L174 168"/>
+              <path class="tree-line" d="M196 106 L218 168"/>
+              <path class="tree-line" d="M268 106 L246 168"/>
+              <path class="tree-line" d="M268 106 L290 168"/>
+              <circle class="tree-root" cx="160" cy="34" r="13"/>
+              <text class="tree-root-text" x="160" y="38" text-anchor="middle" data-i18n="projects.csTreeRoot">Start</text>
+              <circle class="tree-node" cx="52" cy="100" r="9"/>
+              <text class="tree-node-text" x="52" y="124" text-anchor="middle" data-i18n="projects.csTreeN1">Grundlagen</text>
+              <circle class="tree-node" cx="124" cy="100" r="9"/>
+              <text class="tree-node-text" x="124" y="124" text-anchor="middle" data-i18n="projects.csTreeN2">Netzwerke</text>
+              <circle class="tree-node" cx="196" cy="100" r="9"/>
+              <text class="tree-node-text" x="196" y="124" text-anchor="middle" data-i18n="projects.csTreeN3">Angriffe</text>
+              <circle class="tree-node" cx="268" cy="100" r="9"/>
+              <text class="tree-node-text" x="268" y="124" text-anchor="middle" data-i18n="projects.csTreeN4">Verteidigung</text>
+              <circle class="tree-leaf" cx="30" cy="168" r="3.2"/>
+              <circle class="tree-leaf" cx="74" cy="168" r="3.2"/>
+              <circle class="tree-leaf" cx="102" cy="168" r="3.2"/>
+              <circle class="tree-leaf" cx="146" cy="168" r="3.2"/>
+              <circle class="tree-leaf" cx="174" cy="168" r="3.2"/>
+              <circle class="tree-leaf" cx="218" cy="168" r="3.2"/>
+              <circle class="tree-leaf" cx="246" cy="168" r="3.2"/>
+              <circle class="tree-leaf" cx="290" cy="168" r="3.2"/>
+            </svg>
+            <p class="diagram-caption" data-i18n="projects.csTreeCaption">Skill-Tree — Fortschritt sichtbar machen</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="kontakt" aria-labelledby="contact-title">
+      <div class="container contact-grid">
+        <div class="contact-copy" data-reveal>
+          <p class="eyebrow" data-i18n="contact.eyebrow">05 · Kontakt</p>
+          <h2 id="contact-title" data-i18n="contact.title">Schreib mir.</h2>
+          <p data-i18n="contact.lead">Offen für Praktikumsanfragen, Projektideen und Feedback.</p>
+          <p class="note" data-i18n-html="contact.note">Schneller geht es über <a class="text-link" href="https://www.linkedin.com/in/burim-maliki-932824349/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
+        </div>
+
+        <form class="contact-form" id="contact-form" novalidate data-reveal style="--reveal-delay: 120ms" aria-label="Kontaktformular" data-i18n-aria="contact.formAria">
+          <div class="form-banner" id="form-banner" role="status" aria-live="polite" hidden>
+            <svg class="icon banner-icon icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+            <svg class="icon banner-icon icon-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4.5M12 16h.01"/></svg>
+            <div class="banner-text">
+              <p class="banner-title" id="form-banner-title"></p>
+              <p class="banner-body" id="form-banner-body"></p>
+            </div>
+            <button type="button" class="banner-close" id="banner-close" aria-label="Meldung schliessen" data-i18n-aria="contact.dismissAria">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+          </div>
+
+          <div class="field">
+            <label for="contact-email" data-i18n="contact.emailLabel">E-Mail-Adresse</label>
+            <input type="email" id="contact-email" name="email" autocomplete="email" maxlength="254" placeholder="name@beispiel.ch" data-i18n-placeholder="contact.emailPlaceholder" required>
+            <p class="field-error" id="contact-email-error" hidden>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4.5M12 16h.01"/></svg>
+              <span></span>
+            </p>
+          </div>
+
+          <div class="field">
+            <label for="contact-message" data-i18n="contact.messageLabel">Nachricht</label>
+            <textarea id="contact-message" name="message" rows="6" maxlength="2000" placeholder="Worum geht es?" data-i18n-placeholder="contact.messagePlaceholder" required></textarea>
+            <p class="field-error" id="contact-message-error" hidden>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4.5M12 16h.01"/></svg>
+              <span></span>
+            </p>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-submit" id="contact-submit">
+            <span class="spinner" id="contact-spinner" aria-hidden="true" hidden></span>
+            <span id="contact-submit-label" data-i18n="contact.submit">Nachricht senden</span>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">BM</span>
+          Burim&nbsp;Maliki
+        </p>
+        <p class="footer-tagline" data-i18n="footer.tagline">Angehender Applikationsentwickler · Informatikmittelschule</p>
+      </div>
+      <div class="footer-links">
+        <a class="footer-link" href="https://github.com/BurimMaliki" target="_blank" rel="noopener noreferrer" data-i18n-aria="footer.githubAria" aria-label="GitHub öffnen (neuer Tab)">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          GitHub
+        </a>
+        <a class="footer-link" href="https://www.linkedin.com/in/burim-maliki-932824349/" target="_blank" rel="noopener noreferrer" data-i18n-aria="footer.linkedinAria" aria-label="LinkedIn öffnen (neuer Tab)">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <div class="footer-meta">
+        <span data-i18n="footer.rights">© 2026 Burim Maliki</span>
+        <span data-i18n="footer.built">HTML · CSS · Vanilla JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button type="button" class="to-top" id="to-top" aria-label="Nach oben scrollen" data-i18n-aria="a11y.toTop">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/></svg>
+  </button>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* ---------- helpers ---------- */
+      var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
+      var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
+      var store = {
+        get: function (k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } },
+        set: function (k, v) { try { window.localStorage.setItem(k, v); } catch (e) { /* private mode */ } }
+      };
+      var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ---------- translations ---------- */
+      var I18N = {
+        de: {
+          'meta.title': 'Burim Maliki — Portfolio',
+          'meta.desc': 'Portfolio von Burim Maliki: angehender Applikationsentwickler an der Informatikmittelschule, auf der Suche nach einem einjährigen Praktikum in Applikationsentwicklung.',
+
+          'a11y.skip': 'Zum Inhalt springen',
+          'a11y.toTop': 'Nach oben scrollen',
+          'a11y.menuOpen': 'Menü öffnen',
+          'a11y.menuClose': 'Menü schliessen',
+          'a11y.themeToDark': 'Dunkles Design aktivieren',
+          'a11y.themeToLight': 'Helles Design aktivieren',
+          'nav.label': 'Hauptnavigation',
+          'nav.brandAria': 'Burim Maliki — zum Seitenanfang',
+          'nav.start': 'Start',
+          'nav.links': 'Links',
+          'nav.ims': 'IMS',
+          'nav.skills': 'Skills',
+          'nav.projects': 'Projekte',
+          'nav.contact': 'Kontakt',
+
+          'hero.eyebrow': 'Portfolio · Informatikmittelschule',
+          'hero.leadStrong': 'Angehender Applikationsentwickler.',
+          'hero.lead': 'Ich besuche die Informatikmittelschule (IMS) und suche ein einjähriges Praktikum in Applikationsentwicklung. Mein Fokus: Web und Fullstack. Mein Interesse: Sicherheit.',
+          'hero.ctaLinkedin': 'LinkedIn',
+          'hero.ctaGithub': 'GitHub',
+          'hero.linkedinAria': 'LinkedIn-Profil öffnen (neuer Tab)',
+          'hero.githubAria': 'GitHub-Profil öffnen (neuer Tab)',
+          'hero.meta1': 'Informatikmittelschule (IMS)',
+          'hero.meta2': 'Applikationsentwicklung',
+          'hero.meta3': 'Web · Fullstack · Security',
+          'hero.factsAria': 'Auf einen Blick',
+          'hero.factsTitle': 'Auf einen Blick',
+          'hero.fStatusLabel': 'Status',
+          'hero.fStatus': 'Auf der Suche nach dem Praktikumsjahr',
+          'hero.fEducationLabel': 'Ausbildung',
+          'hero.fEducation': 'Informatikmittelschule (IMS)',
+          'hero.fFocusLabel': 'Schwerpunkt',
+          'hero.fFocus': 'Applikationsentwicklung',
+          'hero.fInterestLabel': 'Interessen',
+          'hero.fInterest': 'Web · Fullstack · Security',
+
+          'links.eyebrow': '01 · Profile & Projekte',
+          'links.title': 'Wichtige Links',
+          'links.lead': 'Alle relevanten Profile und Projekte an einem Ort.',
+          'links.githubTitle': 'GitHub',
+          'links.githubDesc': 'Code, Projekte und Experimente.',
+          'links.githubAria': 'GitHub öffnen (neuer Tab)',
+          'links.linkedinTitle': 'LinkedIn',
+          'links.linkedinDesc': 'Profil, Netzwerk und Kontaktaufnahme.',
+          'links.linkedinAria': 'LinkedIn öffnen (neuer Tab)',
+          'links.robofightTitle': 'RoboFight',
+          'links.robofightDesc': 'Strategie-Spiel mit Robotern — Stärke, Tempo, Robustheit.',
+          'links.robofightAria': 'RoboFight öffnen (neuer Tab)',
+          'links.cyberskillsTitle': 'Cyberskills',
+          'links.cyberskillsDesc': 'Lernkonzept für Cybersicherheit mit eigenem Skill-Tree.',
+          'links.cyberskillsAria': 'Cyberskills öffnen (neuer Tab)',
+
+          'ims.eyebrow': '02 · Bildungsweg',
+          'ims.title': 'Informatikmittelschule (IMS)',
+          'ims.p1': 'Die Informatikmittelschule (IMS) ist ein vierjähriger Bildungsgang in der Schweiz: drei Jahre Schule, ein Jahr Praktikum — mit Abschluss eidgenössisches Fähigkeitszeugnis (EFZ) als Applikationsentwickler:in plus Berufsmaturität.',
+          'ims.p2': 'Der Unterricht verbindet Allgemeinbildung mit Informatik — von Programmierung und Webentwicklung über Datenbanken und Netzwerke bis zu Projektmanagement. Welche Module zum EFZ führen, zeigt der offizielle <a class="text-link" href="https://www.modulbaukasten.ch/" target="_blank" rel="noopener noreferrer">Modulbaukasten</a>. Angeboten wird die IMS unter anderem an der <a class="text-link" href="https://www.ksb-sg.ch/ims" target="_blank" rel="noopener noreferrer">Kanti am Brühl (KSB)</a> in St. Gallen.',
+          'ims.cardAria': 'Lerninhalte der IMS',
+          'ims.learnTitle': 'Was man an der IMS lernt',
+          'ims.chip1': 'Programmierung',
+          'ims.chip2': 'Webentwicklung',
+          'ims.chip3': 'Datenbanken',
+          'ims.chip4': 'Netzwerke & Betriebssysteme',
+          'ims.chip5': 'Projektmanagement',
+          'ims.chip6': 'Agile Methoden',
+          'ims.chip7': 'Mathematik & Naturwissenschaften',
+          'ims.chip8': 'Sprachen & Wirtschaft',
+          'ims.chip9': 'Berufsmaturität',
+          'ims.modulesTitle': 'Modulbaukasten',
+          'ims.modulesDesc': 'Offizielle Modulübersicht der IMS',
+          'ims.modulesAria': 'Modulbaukasten öffnen (neuer Tab)',
+          'ims.ksbTitle': 'Kanti am Brühl (KSB)',
+          'ims.ksbDesc': 'Informatikmittelschule in St. Gallen',
+          'ims.ksbAria': 'Kanti am Brühl öffnen (neuer Tab)',
+
+          'skills.eyebrow': '03 · Kompetenzen',
+          'skills.title': 'Skills',
+          'skills.lead': 'Die IMS hat mir eine solide Grundlage gegeben — von den Grundlagen der Programmierung bis zu Datenbanken, Netzwerken und Webentwicklung. Die genauen Inhalte sind im <a class="text-link" href="https://www.modulbaukasten.ch/" target="_blank" rel="noopener noreferrer">Modulbaukasten</a> dokumentiert.',
+          'skills.tabsAria': 'Skill-Kategorien',
+          'skills.tab1': 'Programmiersprachen',
+          'skills.tab2': 'Anwendungsbereiche',
+          'skills.tab3': 'Soft Skills',
+          'skills.langJs': 'JavaScript', 'skills.langJsDesc': 'Webanwendungen & interaktive Interfaces',
+          'skills.langHtml': 'HTML', 'skills.langHtmlDesc': 'Semantisches Markup & zugängliche Struktur',
+          'skills.langCss': 'CSS', 'skills.langCssDesc': 'Layout, Responsive Design & Design-Systeme',
+          'skills.langC': 'C', 'skills.langCDesc': 'Systemnahe Grundlagen & Speicherverwaltung',
+          'skills.langCpp': 'C++', 'skills.langCppDesc': 'Objektorientierte Programmierung',
+          'skills.langJava': 'Java', 'skills.langJavaDesc': 'Stark typisierte Anwendungen',
+          'skills.areaFrontend': 'Frontend', 'skills.areaFrontendDesc': 'Interfaces, Usability & Barrierefreiheit',
+          'skills.areaBackend': 'Backend', 'skills.areaBackendDesc': 'APIs, Services & Geschäftslogik',
+          'skills.areaFullstack': 'Fullstack', 'skills.areaFullstackDesc': 'Von der Datenbank bis zum UI',
+          'skills.areaSql': 'SQL & NoSQL Datenbanken', 'skills.areaSqlDesc': 'Relationale & dokumentenbasierte Systeme',
+          'skills.areaContainer': 'Container', 'skills.areaContainerDesc': 'Docker & isolierte Laufzeitumgebungen',
+          'skills.areaAi': 'AI Skills', 'skills.areaAiDesc': 'KI-gestützte Tools & Workflows',
+          'skills.soft1': 'Teamfähigkeit', 'skills.soft1Desc': 'Gemeinsam Lösungen erarbeiten',
+          'skills.soft2': 'Überzeugungsfähigkeit', 'skills.soft2Desc': 'Ideen klar und sachlich vertreten',
+          'skills.soft3': 'Feedback geben & annehmen', 'skills.soft3Desc': 'Offen für konstruktive Kritik',
+          'skills.soft4': 'Empathie', 'skills.soft4Desc': 'Perspektiven anderer verstehen',
+          'skills.soft5': 'Toleranz', 'skills.soft5Desc': 'Unterschiedliche Sichtweisen respektieren',
+          'skills.soft6': 'Neugier', 'skills.soft6Desc': 'Neues verstehen und ausprobieren',
+          'skills.soft7': 'Strategisches Denken', 'skills.soft7Desc': 'Probleme in Schritte zerlegen',
+          'skills.soft8': 'Geduld', 'skills.soft8Desc': 'Dranbleiben bei komplexen Aufgaben',
+          'skills.soft9': 'Verantwortungsübernahme', 'skills.soft9Desc': 'Für Ergebnisse einstehen',
+
+          'projects.eyebrow': '04 · Arbeit',
+          'projects.title': 'Projekte',
+          'projects.lead': 'Zwei Projekte, zwei Ansätze: ein spielbares Strategie-Spiel und das Konzept für eine Lernplattform.',
+          'projects.rfTag': 'Spiel · Web',
+          'projects.rfTitle': 'RoboFight',
+          'projects.rfDesc': 'Zwei Spieler bauen Roboter aus drei Werten — Stärke, Tempo und Robustheit — und lassen sie gegeneinander antreten. Wie bei Schere, Stein, Papier kontert jeder Wert einen anderen; eine spezielle Kampfformel entscheidet den Kampf.',
+          'projects.rfChipsAria': 'Eigenschaften von RoboFight',
+          'projects.rfChip1': '2 Spieler',
+          'projects.rfChip2': 'Stärke · Tempo · Robustheit',
+          'projects.rfChip3': 'Typ-System',
+          'projects.rfChip4': 'Kampfformel',
+          'projects.rfCta': 'RoboFight ansehen',
+          'projects.rfCtaAria': 'RoboFight ansehen (neuer Tab)',
+          'projects.rfVisualAria': 'RoboFight Mechanik',
+          'projects.rfStatsTitle': 'Roboter-Werte',
+          'projects.rfStatStrength': 'Stärke',
+          'projects.rfStatSpeed': 'Tempo',
+          'projects.rfStatDurability': 'Robustheit',
+          'projects.rfDiagramAria': 'Typ-System von RoboFight: Stärke schlägt Tempo, Tempo schlägt Robustheit, Robustheit schlägt Stärke.',
+          'projects.rfDiagramCaption': 'Typ-System: schlägt im Kreis',
+          'projects.rfFormulaCaption': 'Kampfformel (vereinfacht)',
+          'projects.rfFormula': 'Schaden = Stärke × Typ-Faktor − Robustheit',
+          'projects.csTag': 'Konzept · Blueprint',
+          'projects.csTitle': 'Cyberskills',
+          'projects.csDesc': 'Das Konzept für eine Lernplattform, die Cybersicherheit verständlich macht: eine klar definierte Zielgruppe, messbare Lernziele und ein eigenes Skill-Tree-System, das den Lernfortschritt sichtbar macht.',
+          'projects.csChipsAria': 'Eigenschaften von Cyberskills',
+          'projects.csChip1': 'Zielgruppe definiert',
+          'projects.csChip2': 'Messbare Lernziele',
+          'projects.csChip3': 'Skill-Tree',
+          'projects.csChip4': 'Konzeptphase',
+          'projects.csAudienceLabel': 'Zielgruppe',
+          'projects.csAudience': 'Jugendliche und Einsteiger:innen, die verstehen wollen, wie Angriffe funktionieren und wie man sich schützt.',
+          'projects.csOutcomesLabel': 'Lernziele',
+          'projects.csOutcomes': 'Netzwerke, Angriffsmethoden und Verteidigung im Alltag verstehen und anwenden.',
+          'projects.csTreeLabel': 'Skill-Tree-System',
+          'projects.csTree': 'Ein eigener Fähigkeiten-Baum, der Fortschritt sichtbar macht und motiviert.',
+          'projects.csCta': 'Cyberskills ansehen',
+          'projects.csCtaAria': 'Cyberskills ansehen (neuer Tab)',
+          'projects.csVisualAria': 'Cyberskills Skill-Tree',
+          'projects.csTreeTitle': 'Skill-Tree-System',
+          'projects.csTreeRoot': 'Start',
+          'projects.csTreeN1': 'Grundlagen',
+          'projects.csTreeN2': 'Netzwerke',
+          'projects.csTreeN3': 'Angriffe',
+          'projects.csTreeN4': 'Verteidigung',
+          'projects.csDiagramAria': 'Skill-Tree von Cyberskills: vom Start-Modul über Grundlagen, Netzwerke, Angriffe und Verteidigung.',
+          'projects.csTreeCaption': 'Skill-Tree — Fortschritt sichtbar machen',
+
+          'contact.eyebrow': '05 · Kontakt',
+          'contact.title': 'Schreib mir.',
+          'contact.lead': 'Offen für Praktikumsanfragen, Projektideen und Feedback.',
+          'contact.note': 'Schneller geht es über <a class="text-link" href="https://www.linkedin.com/in/burim-maliki-932824349/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.',
+          'contact.formAria': 'Kontaktformular',
+          'contact.emailLabel': 'E-Mail-Adresse',
+          'contact.emailPlaceholder': 'name@beispiel.ch',
+          'contact.messageLabel': 'Nachricht',
+          'contact.messagePlaceholder': 'Worum geht es?',
+          'contact.submit': 'Nachricht senden',
+          'contact.sending': 'Wird gesendet …',
+          'contact.dismissAria': 'Meldung schliessen',
+          'contact.errEmailRequired': 'Bitte gib deine E-Mail-Adresse ein.',
+          'contact.errEmailInvalid': 'Bitte gib eine gültige E-Mail-Adresse ein.',
+          'contact.errMsgRequired': 'Bitte schreib eine Nachricht.',
+          'contact.errMsgMin': 'Die Nachricht sollte mindestens 10 Zeichen lang sein.',
+          'contact.errCheckFields': 'Bitte prüfe die markierten Felder.',
+          'contact.errorTitle': 'Senden fehlgeschlagen.',
+          'contact.successTitle': 'Nachricht gesendet.',
+          'contact.successBody': 'Danke für deine Nachricht — ich melde mich so bald wie möglich.',
+
+          'footer.tagline': 'Angehender Applikationsentwickler · Informatikmittelschule',
+          'footer.githubAria': 'GitHub öffnen (neuer Tab)',
+          'footer.linkedinAria': 'LinkedIn öffnen (neuer Tab)',
+          'footer.rights': '© 2026 Burim Maliki',
+          'footer.built': 'HTML · CSS · Vanilla JS'
+        },
+        en: {
+          'meta.title': 'Burim Maliki — Portfolio',
+          'meta.desc': 'Portfolio of Burim Maliki: aspiring application developer at the Informatikmittelschule (IMS), looking for a one-year internship in application development.',
+
+          'a11y.skip': 'Skip to content',
+          'a11y.toTop': 'Back to top',
+          'a11y.menuOpen': 'Open menu',
+          'a11y.menuClose': 'Close menu',
+          'a11y.themeToDark': 'Switch to dark mode',
+          'a11y.themeToLight': 'Switch to light mode',
+          'nav.label': 'Main navigation',
+          'nav.brandAria': 'Burim Maliki — back to top',
+          'nav.start': 'Home',
+          'nav.links': 'Links',
+          'nav.ims': 'IMS',
+          'nav.skills': 'Skills',
+          'nav.projects': 'Projects',
+          'nav.contact': 'Contact',
+
+          'hero.eyebrow': 'Portfolio · Informatikmittelschule (IMS)',
+          'hero.leadStrong': 'Aspiring application developer.',
+          'hero.lead': 'I attend the Informatikmittelschule (IMS) and am looking for a one-year internship in application development. My focus: web and full-stack. My interest: security.',
+          'hero.ctaLinkedin': 'LinkedIn',
+          'hero.ctaGithub': 'GitHub',
+          'hero.linkedinAria': 'Open LinkedIn profile (new tab)',
+          'hero.githubAria': 'Open GitHub profile (new tab)',
+          'hero.meta1': 'Informatikmittelschule (IMS)',
+          'hero.meta2': 'Application development',
+          'hero.meta3': 'Web · Full-stack · Security',
+          'hero.factsAria': 'At a glance',
+          'hero.factsTitle': 'At a glance',
+          'hero.fStatusLabel': 'Status',
+          'hero.fStatus': 'Looking for the internship year',
+          'hero.fEducationLabel': 'Education',
+          'hero.fEducation': 'Informatikmittelschule (IMS)',
+          'hero.fFocusLabel': 'Focus',
+          'hero.fFocus': 'Application development',
+          'hero.fInterestLabel': 'Interests',
+          'hero.fInterest': 'Web · Full-stack · Security',
+
+          'links.eyebrow': '01 · Profiles & projects',
+          'links.title': 'Important links',
+          'links.lead': 'All relevant profiles and projects in one place.',
+          'links.githubTitle': 'GitHub',
+          'links.githubDesc': 'Code, projects, and experiments.',
+          'links.githubAria': 'Open GitHub (new tab)',
+          'links.linkedinTitle': 'LinkedIn',
+          'links.linkedinDesc': 'Profile, network, and a direct way to reach me.',
+          'links.linkedinAria': 'Open LinkedIn (new tab)',
+          'links.robofightTitle': 'RoboFight',
+          'links.robofightDesc': 'Strategy game with robots — strength, speed, durability.',
+          'links.robofightAria': 'Open RoboFight (new tab)',
+          'links.cyberskillsTitle': 'Cyberskills',
+          'links.cyberskillsDesc': 'A learning concept for cybersecurity with its own skill tree.',
+          'links.cyberskillsAria': 'Open Cyberskills (new tab)',
+
+          'ims.eyebrow': '02 · Education',
+          'ims.title': 'Informatikmittelschule (IMS)',
+          'ims.p1': 'The Informatikmittelschule (IMS) is a four-year programme in Switzerland: three years of school, one year of internship — leading to the federal diploma (EFZ) as an application developer plus a vocational baccalaureate.',
+          'ims.p2': 'Classes combine general education with computer science — from programming and web development to databases, networks, and project management. The official <a class="text-link" href="https://www.modulbaukasten.ch/" target="_blank" rel="noopener noreferrer">Modulbaukasten</a> (module catalogue) shows which modules lead to the diploma. The IMS is offered, among others, at the <a class="text-link" href="https://www.ksb-sg.ch/ims" target="_blank" rel="noopener noreferrer">Kanti am Brühl (KSB)</a> in St. Gallen.',
+          'ims.cardAria': 'What students learn at the IMS',
+          'ims.learnTitle': 'What students learn at the IMS',
+          'ims.chip1': 'Programming',
+          'ims.chip2': 'Web development',
+          'ims.chip3': 'Databases',
+          'ims.chip4': 'Networks & operating systems',
+          'ims.chip5': 'Project management',
+          'ims.chip6': 'Agile methods',
+          'ims.chip7': 'Maths & natural sciences',
+          'ims.chip8': 'Languages & economics',
+          'ims.chip9': 'Vocational baccalaureate',
+          'ims.modulesTitle': 'Modulbaukasten',
+          'ims.modulesDesc': 'Official IMS module catalogue',
+          'ims.modulesAria': 'Open the Modulbaukasten (new tab)',
+          'ims.ksbTitle': 'Kanti am Brühl (KSB)',
+          'ims.ksbDesc': 'School offering the IMS in St. Gallen',
+          'ims.ksbAria': 'Open Kanti am Brühl (new tab)',
+
+          'skills.eyebrow': '03 · Competencies',
+          'skills.title': 'Skills',
+          'skills.lead': 'The IMS gave me a solid foundation — from programming fundamentals to databases, networks, and web development. The exact contents are documented in the <a class="text-link" href="https://www.modulbaukasten.ch/" target="_blank" rel="noopener noreferrer">Modulbaukasten</a>.',
+          'skills.tabsAria': 'Skill categories',
+          'skills.tab1': 'Programming languages',
+          'skills.tab2': 'Application areas',
+          'skills.tab3': 'Soft skills',
+          'skills.langJs': 'JavaScript', 'skills.langJsDesc': 'Web apps & interactive interfaces',
+          'skills.langHtml': 'HTML', 'skills.langHtmlDesc': 'Semantic markup & accessible structure',
+          'skills.langCss': 'CSS', 'skills.langCssDesc': 'Layout, responsive design & design systems',
+          'skills.langC': 'C', 'skills.langCDesc': 'Low-level fundamentals & memory management',
+          'skills.langCpp': 'C++', 'skills.langCppDesc': 'Object-oriented programming',
+          'skills.langJava': 'Java', 'skills.langJavaDesc': 'Strongly typed applications',
+          'skills.areaFrontend': 'Frontend', 'skills.areaFrontendDesc': 'Interfaces, usability & accessibility',
+          'skills.areaBackend': 'Backend', 'skills.areaBackendDesc': 'APIs, services & business logic',
+          'skills.areaFullstack': 'Full-stack', 'skills.areaFullstackDesc': 'From the database to the UI',
+          'skills.areaSql': 'SQL & NoSQL databases', 'skills.areaSqlDesc': 'Relational & document-based systems',
+          'skills.areaContainer': 'Containers', 'skills.areaContainerDesc': 'Docker & isolated runtime environments',
+          'skills.areaAi': 'AI skills', 'skills.areaAiDesc': 'AI-assisted tools & workflows',
+          'skills.soft1': 'Teamwork', 'skills.soft1Desc': 'Finding solutions together',
+          'skills.soft2': 'Persuasiveness', 'skills.soft2Desc': 'Presenting ideas clearly and factually',
+          'skills.soft3': 'Giving & receiving feedback', 'skills.soft3Desc': 'Open to constructive criticism',
+          'skills.soft4': 'Empathy', 'skills.soft4Desc': 'Understanding other people\u2019s perspectives',
+          'skills.soft5': 'Tolerance', 'skills.soft5Desc': 'Respecting different points of view',
+          'skills.soft6': 'Curiosity', 'skills.soft6Desc': 'Learning and trying new things',
+          'skills.soft7': 'Strategic thinking', 'skills.soft7Desc': 'Breaking problems down into steps',
+          'skills.soft8': 'Patience', 'skills.soft8Desc': 'Sticking with complex tasks',
+          'skills.soft9': 'Taking responsibility', 'skills.soft9Desc': 'Owning the results',
+
+          'projects.eyebrow': '04 · Work',
+          'projects.title': 'Projects',
+          'projects.lead': 'Two projects, two approaches: a playable strategy game and the concept for a learning platform.',
+          'projects.rfTag': 'Game · Web',
+          'projects.rfTitle': 'RoboFight',
+          'projects.rfDesc': 'Two players build robots from three stats — Strength, Speed and Durability — and pit them against each other. Like rock-paper-scissors, each stat counters another, and a special combat formula decides the fight.',
+          'projects.rfChipsAria': 'RoboFight features',
+          'projects.rfChip1': '2 players',
+          'projects.rfChip2': 'Strength · Speed · Durability',
+          'projects.rfChip3': 'Type system',
+          'projects.rfChip4': 'Combat formula',
+          'projects.rfCta': 'View RoboFight',
+          'projects.rfCtaAria': 'View RoboFight (new tab)',
+          'projects.rfVisualAria': 'RoboFight mechanics',
+          'projects.rfStatsTitle': 'Robot stats',
+          'projects.rfStatStrength': 'Strength',
+          'projects.rfStatSpeed': 'Speed',
+          'projects.rfStatDurability': 'Durability',
+          'projects.rfDiagramAria': 'RoboFight type system: Strength beats Speed, Speed beats Durability, Durability beats Strength.',
+          'projects.rfDiagramCaption': 'Type system: counters in a cycle',
+          'projects.rfFormulaCaption': 'Combat formula (simplified)',
+          'projects.rfFormula': 'Damage = Strength × Type factor − Durability',
+          'projects.csTag': 'Concept · Blueprint',
+          'projects.csTitle': 'Cyberskills',
+          'projects.csDesc': 'The concept for a learning platform that makes cybersecurity easy to understand: a clearly defined target audience, measurable learning outcomes, and a unique skill-tree system that makes progress visible.',
+          'projects.csChipsAria': 'Cyberskills features',
+          'projects.csChip1': 'Defined target audience',
+          'projects.csChip2': 'Measurable outcomes',
+          'projects.csChip3': 'Skill tree',
+          'projects.csChip4': 'Concept stage',
+          'projects.csAudienceLabel': 'Target audience',
+          'projects.csAudience': 'Young people and beginners who want to understand how attacks work and how to protect themselves.',
+          'projects.csOutcomesLabel': 'Learning outcomes',
+          'projects.csOutcomes': 'Understand and apply networks, attack methods, and everyday defence.',
+          'projects.csTreeLabel': 'Skill-tree system',
+          'projects.csTree': 'A dedicated skill tree that makes progress visible and keeps learners motivated.',
+          'projects.csCta': 'View Cyberskills',
+          'projects.csCtaAria': 'View Cyberskills (new tab)',
+          'projects.csVisualAria': 'Cyberskills skill tree',
+          'projects.csTreeTitle': 'Skill-tree system',
+          'projects.csTreeRoot': 'Start',
+          'projects.csTreeN1': 'Fundamentals',
+          'projects.csTreeN2': 'Networks',
+          'projects.csTreeN3': 'Attacks',
+          'projects.csTreeN4': 'Defence',
+          'projects.csDiagramAria': 'Cyberskills skill tree: from the start module through fundamentals, networks, attacks, and defence.',
+          'projects.csTreeCaption': 'Skill tree — making progress visible',
+
+          'contact.eyebrow': '05 · Contact',
+          'contact.title': 'Write to me.',
+          'contact.lead': 'Open to internship enquiries, project ideas, and feedback.',
+          'contact.note': 'It\u2019s faster via <a class="text-link" href="https://www.linkedin.com/in/burim-maliki-932824349/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.',
+          'contact.formAria': 'Contact form',
+          'contact.emailLabel': 'Email address',
+          'contact.emailPlaceholder': 'name@example.com',
+          'contact.messageLabel': 'Message',
+          'contact.messagePlaceholder': 'What is it about?',
+          'contact.submit': 'Send message',
+          'contact.sending': 'Sending …',
+          'contact.dismissAria': 'Dismiss notification',
+          'contact.errEmailRequired': 'Please enter your email address.',
+          'contact.errEmailInvalid': 'Please enter a valid email address.',
+          'contact.errMsgRequired': 'Please write a message.',
+          'contact.errMsgMin': 'The message should be at least 10 characters long.',
+          'contact.errCheckFields': 'Please check the highlighted fields.',
+          'contact.errorTitle': 'Sending failed.',
+          'contact.successTitle': 'Message sent.',
+          'contact.successBody': 'Thanks for your message — I will get back to you as soon as possible.',
+
+          'footer.tagline': 'Aspiring application developer · Informatikmittelschule (IMS)',
+          'footer.githubAria': 'Open GitHub (new tab)',
+          'footer.linkedinAria': 'Open LinkedIn (new tab)',
+          'footer.rights': '© 2026 Burim Maliki',
+          'footer.built': 'HTML · CSS · Vanilla JS'
+        }
+      };
+
+      var currentLang = document.documentElement.getAttribute('data-lang') === 'en' ? 'en' : 'de';
+
+      function t(key) {
+        return (I18N[currentLang] && I18N[currentLang][key] !== undefined)
+          ? I18N[currentLang][key]
+          : (I18N.de[key] !== undefined ? I18N.de[key] : key);
+      }
+
+      /* ---------- language ---------- */
+      function applyLanguage(lang) {
+        currentLang = lang === 'en' ? 'en' : 'de';
+        document.documentElement.lang = currentLang;
+        document.documentElement.setAttribute('data-lang', currentLang);
+
+        $$('[data-i18n]').forEach(function (el) {
+          var v = I18N[currentLang][el.getAttribute('data-i18n')];
+          if (v !== undefined) el.textContent = v;
+        });
+        $$('[data-i18n-html]').forEach(function (el) {
+          var v = I18N[currentLang][el.getAttribute('data-i18n-html')];
+          if (v !== undefined) el.innerHTML = v;
+        });
+        $$('[data-i18n-aria]').forEach(function (el) {
+          var v = I18N[currentLang][el.getAttribute('data-i18n-aria')];
+          if (v !== undefined) el.setAttribute('aria-label', v);
+        });
+        $$('[data-i18n-placeholder]').forEach(function (el) {
+          var v = I18N[currentLang][el.getAttribute('data-i18n-placeholder')];
+          if (v !== undefined) el.setAttribute('placeholder', v);
+        });
+
+        document.title = t('meta.title');
+        var desc = $('meta[name="description"]');
+        if (desc) desc.setAttribute('content', t('meta.desc'));
+
+        $$('.lang-btn').forEach(function (btn) {
+          btn.setAttribute('aria-pressed', String(btn.getAttribute('data-lang') === currentLang));
+        });
+
+        syncDynamicLabels();
+        store.set('bm-lang', currentLang);
+      }
+
+      $$('.lang-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () { applyLanguage(btn.getAttribute('data-lang')); });
+      });
+
+      /* ---------- theme ---------- */
+      var themeBtn = $('#theme-toggle');
+      var htmlEl = document.documentElement;
+
+      function themeLabel() {
+        return t(htmlEl.getAttribute('data-theme') === 'dark' ? 'a11y.themeToLight' : 'a11y.themeToDark');
+      }
+      function setTheme(mode) {
+        htmlEl.setAttribute('data-theme', mode);
+        store.set('bm-theme', mode);
+        themeBtn.setAttribute('aria-label', themeLabel());
+      }
+      themeBtn.addEventListener('click', function () {
+        setTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      });
+
+      /* ---------- mobile menu ---------- */
+      var menuBtn = $('#menu-toggle');
+      var siteNav = $('#site-nav');
+
+      function closeMenu(focusBtn) {
+        siteNav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.setAttribute('aria-label', t('a11y.menuOpen'));
+        if (focusBtn) menuBtn.focus();
+      }
+      function openMenu() {
+        siteNav.classList.add('open');
+        menuBtn.setAttribute('aria-expanded', 'true');
+        menuBtn.setAttribute('aria-label', t('a11y.menuClose'));
+      }
+      menuBtn.addEventListener('click', function () {
+        if (siteNav.classList.contains('open')) closeMenu(); else openMenu();
+      });
+      $$('#site-nav a').forEach(function (link) {
+        link.addEventListener('click', function () { closeMenu(); });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && siteNav.classList.contains('open')) closeMenu(true);
+      });
+
+      /* ---------- tabs (keyboard accessible) ---------- */
+      $$('.tabs').forEach(function (tablist) {
+        var tabs = $$('[role="tab"]', tablist);
+        var panels = tabs.map(function (tab) {
+          return document.getElementById(tab.getAttribute('aria-controls'));
+        });
+        function activate(tab, focus) {
+          tabs.forEach(function (t, i) {
+            var selected = t === tab;
+            t.setAttribute('aria-selected', String(selected));
+            t.tabIndex = selected ? 0 : -1;
+            if (panels[i]) {
+              panels[i].hidden = !selected;
+              panels[i].classList.toggle('is-visible', selected);
             }
-            showMenu('nav-toggle','nav-menu')
+          });
+          if (focus) tab.focus();
+        }
+        tabs.forEach(function (tab) {
+          tab.addEventListener('click', function () { activate(tab, false); });
+        });
+        tablist.addEventListener('keydown', function (e) {
+          var idx = tabs.indexOf(document.activeElement);
+          if (idx === -1) return;
+          var next = null;
+          if (e.key === 'ArrowRight') next = tabs[(idx + 1) % tabs.length];
+          else if (e.key === 'ArrowLeft') next = tabs[(idx - 1 + tabs.length) % tabs.length];
+          else if (e.key === 'Home') next = tabs[0];
+          else if (e.key === 'End') next = tabs[tabs.length - 1];
+          else return;
+          e.preventDefault();
+          activate(next, true);
+        });
+      });
 
-            /*==================== REMOVE MENU MOBILE ====================*/
-            const navLink = document.querySelectorAll('.nav__link')
+      /* ---------- sticky header state, back-to-top, active nav ---------- */
+      var header = $('#site-header');
+      var toTopBtn = $('#to-top');
+      var ticking = false;
 
-            function linkAction(){
-                const navMenu = document.getElementById('nav-menu')
-                navMenu.classList.remove('show')
+      function onScroll() {
+        var y = window.scrollY || document.documentElement.scrollTop || 0;
+        header.classList.toggle('is-scrolled', y > 4);
+        toTopBtn.classList.toggle('is-visible', y > 560);
+        ticking = false;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          ticking = true;
+          window.requestAnimationFrame(onScroll);
+        }
+      }, { passive: true });
+      onScroll();
+
+      toTopBtn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, left: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      });
+
+      var navLinks = $$('#site-nav a[href^="#"]');
+      if ('IntersectionObserver' in window) {
+        var sectionObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            navLinks.forEach(function (link) {
+              if (link.getAttribute('href') === '#' + entry.target.id) {
+                link.setAttribute('aria-current', 'true');
+              } else {
+                link.removeAttribute('aria-current');
+              }
+            });
+          });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+        $$('main section[id]').forEach(function (section) { sectionObserver.observe(section); });
+      }
+
+      /* ---------- reveal on scroll ---------- */
+      var revealEls = $$('[data-reveal]');
+      if ('IntersectionObserver' in window && !prefersReducedMotion) {
+        var revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
             }
-            navLink.forEach(n => n.addEventListener('click', linkAction))
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(function (el) { revealObserver.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+      }
 
-            /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
-            const sections = document.querySelectorAll('section[id]')
+      /* ---------- contact form ---------- */
+      var form = $('#contact-form');
+      var emailInput = $('#contact-email');
+      var msgInput = $('#contact-message');
+      var emailError = $('#contact-email-error');
+      var msgError = $('#contact-message-error');
+      var submitBtn = $('#contact-submit');
+      var submitLabel = $('#contact-submit-label');
+      var spinner = $('#contact-spinner');
+      var banner = $('#form-banner');
+      var bannerTitle = $('#form-banner-title');
+      var bannerBody = $('#form-banner-body');
+      var bannerClose = $('#banner-close');
+      var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      var bannerTimer = null;
 
-            const scrollActive = () =>{
-                const scrollDown = window.scrollY
+      function setFieldError(input, errEl, message) {
+        input.setAttribute('aria-invalid', 'true');
+        input.setAttribute('aria-describedby', errEl.id);
+        errEl.querySelector('span').textContent = message;
+        errEl.hidden = false;
+        input.classList.add('is-invalid');
+      }
+      function clearFieldError(input, errEl) {
+        input.removeAttribute('aria-invalid');
+        input.removeAttribute('aria-describedby');
+        errEl.hidden = true;
+        input.classList.remove('is-invalid');
+      }
+      function hideBanner() {
+        clearTimeout(bannerTimer);
+        banner.hidden = true;
+      }
+      function showBanner(type, title, body) {
+        clearTimeout(bannerTimer);
+        banner.className = 'form-banner is-' + type;
+        bannerTitle.textContent = title;
+        bannerBody.textContent = body;
+        banner.hidden = false;
+        if (type === 'success') {
+          bannerTimer = setTimeout(hideBanner, 8000);
+        }
+      }
+      function setSubmitting(on) {
+        submitBtn.disabled = on;
+        submitBtn.setAttribute('aria-busy', String(on));
+        spinner.hidden = !on;
+        submitLabel.textContent = t(on ? 'contact.sending' : 'contact.submit');
+      }
 
-              sections.forEach(current =>{
-                    const sectionHeight = current.offsetHeight,
-                          sectionTop = current.offsetTop - 58,
-                          sectionId = current.getAttribute('id'),
-                          sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
-                    
-                    if(scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight){
-                        sectionsClass.classList.add('active-link')
-                    }else{
-                        sectionsClass.classList.remove('active-link')
-                    }                                                    
-                })
-            }
-            window.addEventListener('scroll', scrollActive)
-        </script>
-    </body>
+      bannerClose.addEventListener('click', hideBanner);
+      emailInput.addEventListener('input', function () {
+        clearFieldError(emailInput, emailError);
+        if (banner.classList.contains('is-error')) hideBanner();
+      });
+      msgInput.addEventListener('input', function () {
+        clearFieldError(msgInput, msgError);
+        if (banner.classList.contains('is-error')) hideBanner();
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        clearFieldError(emailInput, emailError);
+        clearFieldError(msgInput, msgError);
+        hideBanner();
+
+        var email = emailInput.value.trim();
+        var message = msgInput.value.trim();
+        var firstInvalid = null;
+
+        if (!email) {
+          setFieldError(emailInput, emailError, t('contact.errEmailRequired'));
+          firstInvalid = emailInput;
+        } else if (!EMAIL_RE.test(email)) {
+          setFieldError(emailInput, emailError, t('contact.errEmailInvalid'));
+          firstInvalid = emailInput;
+        }
+
+        if (!message) {
+          setFieldError(msgInput, msgError, t('contact.errMsgRequired'));
+          if (!firstInvalid) firstInvalid = msgInput;
+        } else if (message.length < 10) {
+          setFieldError(msgInput, msgError, t('contact.errMsgMin'));
+          if (!firstInvalid) firstInvalid = msgInput;
+        }
+
+        if (firstInvalid) {
+          showBanner('error', t('contact.errorTitle'), t('contact.errCheckFields'));
+          firstInvalid.focus();
+          return;
+        }
+
+        setSubmitting(true);
+        /* Simulated async send — swap this block for a real endpoint later. */
+        window.setTimeout(function () {
+          setSubmitting(false);
+          showBanner('success', t('contact.successTitle'), t('contact.successBody'));
+          form.reset();
+        }, 900);
+      });
+
+      /* ---------- dynamic labels after language switch ---------- */
+      function syncDynamicLabels() {
+        themeBtn.setAttribute('aria-label', themeLabel());
+        toTopBtn.setAttribute('aria-label', t('a11y.toTop'));
+        menuBtn.setAttribute('aria-label', t(siteNav.classList.contains('open') ? 'a11y.menuClose' : 'a11y.menuOpen'));
+        if (!submitBtn.disabled) submitLabel.textContent = t('contact.submit');
+      }
+
+      /* ---------- init ---------- */
+      applyLanguage(currentLang);
+      syncDynamicLabels();
+    })();
+  </script>
+</body>
 </html>
