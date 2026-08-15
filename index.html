@@ -1,744 +1,636 @@
 <!DOCTYPE html>
-<html lang="de">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Burim Portfolio Website</title>
-        
-        <!-- BOX ICONS -->
-        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-        <!-- Google Fonts -->
-        <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap' rel='stylesheet'>
-        
-        <style>
-            /*===== VARIABLES CSS =====*/
-            :root{
-                --header-height: 3rem;
-                --font-semi: 600;
-                
-                /*===== Colors =====*/
-                --hue-color: 224;
-                --first-color: hsl(var(--hue-color), 89%, 60%);
-                --second-color: hsl(var(--hue-color), 56%, 12%);
-
-                /*===== Font and typography =====*/
-                --body-font: 'Poppins', sans-serif;
-
-                --big-font-size: 2rem;
-                --h2-font-size: 1.25rem;
-                --normal-font-size: .938rem;
-                --smaller-font-size: .75rem;
-
-                /*===== Margins =====*/
-                --mb-2: 1rem;
-                --mb-4: 2rem;
-                --mb-5: 2.5rem;
-                --mb-6: 3rem;
-
-                /*===== z index =====*/
-                --z-back: -10;
-                --z-fixed: 100;
-            }
-
-            @media screen and (min-width: 968px){
-                :root {
-                    --big-font-size: 3.5rem;
-                    --h2-font-size: 2rem;
-                    --normal-font-size: 1rem;
-                    --smaller-font-size: .875rem;
-                }
-            }
-
-            /*===== BASE =====*/
-            *,::before,::after{
-                box-sizing: border-box;
-            }
-            html{
-                scroll-behavior: smooth;
-            }
-            body{
-                margin: var(--header-height) 0 0 0;
-                font-family: var(--body-font);
-                font-size: var(--normal-font-size);
-                color: var(--second-color);
-            }
-            h1,h2,p{
-                margin: 0;  
-            }
-            ul{
-                margin: 0;
-                padding: 0;
-                list-style: none;
-            }
-            a{
-                text-decoration: none;
-            }
-            img{
-                max-width: 100%;
-                height: auto;
-                display: block;
-            }
-
-            /*===== CLASS CSS ===== */
-            .section-title{
-                position: relative;
-                font-size: var(--h2-font-size);
-                color: var(--first-color);
-                margin-top: var(--mb-2);
-                margin-bottom: var(--mb-4);
-                text-align: center;
-            }
-
-            .section-title::after{
-                position: absolute;
-                content: '';
-                width: 64px;
-                height: 0.18rem;
-                left: 0;
-                right: 0;
-                margin: auto;
-                top: 2rem;
-                background-color: var(--first-color);
-            }
-
-            .section{
-                padding-top: 3rem;
-                padding-bottom: 2rem;
-            }
-
-            /*===== LAYOUT =====*/
-            .bd-grid{
-                max-width: 1024px;
-                display: grid;
-                margin-left: var(--mb-2);
-                margin-right: var(--mb-2);
-            }
-            .l-header{
-                width: 100%;
-                position: fixed;
-                top: 0;
-                left: 0;
-                z-index: var(--z-fixed);
-                background-color: #fff;
-                box-shadow: 0 1px 4px rgba(146,161,176,.15);
-            }
-
-            /*===== NAV =====*/
-            .nav{
-                height: var(--header-height);
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                font-weight: var(--font-semi);
-            }
-
-            .nav__menu{
-                @media screen and (max-width: 767px){
-                    position: fixed;
-                    top: var(--header-height);
-                    right: -100%;
-                    width: 80%;
-                    height: 100%;
-                    padding: 2rem;
-                    background-color: var(--second-color);
-                    transition: .5s;
-                }
-            }
-
-            .nav__item{
-                margin-bottom: var(--mb-4);
-            }
-
-            .nav__link{
-                position: relative;
-                color: #fff;
-            }
-
-            .nav__link:hover::after{
-                position: absolute;
-                content: '';
-                width: 100%;
-                height: 0.18rem;
-                left: 0;
-                top: 2rem;
-                background-color: var(--first-color);
-            }
-
-            .nav__logo{
-                color: var(--second-color);
-            }
-            .nav__toggle{
-                color: var(--second-color);
-                font-size: 1.5rem;
-                cursor: pointer;
-            }
-
-            /*Active menu*/
-            .active-link::after{
-                position: absolute;
-                content: '';
-                width: 100%;
-                height: 0.18rem;
-                left: 0;
-                top: 2rem;
-                background-color: var(--first-color);
-            }
-
-            /*=== Show menu ===*/
-            .show{
-                right: 0;
-            }
-
-            /*===== HOME =====*/
-            .home{
-                position: relative;
-                row-gap: 5rem;
-                padding: 4rem 0 5rem;
-            }
-
-            .home__data{
-                align-self: center;
-            }
-
-            .home__title{
-                font-size: var(--big-font-size);
-                margin-bottom: var(--mb-5);
-            }
-
-            .home__title-color{
-                color: var(--first-color);
-            }
-
-            .home__social{
-                display: flex;
-                flex-direction: column;
-            }
-
-            .home__social-icon{
-                width: max-content;
-                margin-bottom: var(--mb-2);
-                font-size: 1.5rem;
-                color: var(--second-color);
-            }
-
-            .home__social-icon:hover{
-                color: var(--first-color);
-            }
-
-            .home__img{
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                width: 260px;
-            }
-
-            .home__blob{
-                fill: var(--first-color);
-            }
-
-            .home__blob-img{
-                width: 360px;
-            }
-
-            /*BUTTONS*/
-            .button{
-                display: inline-block;
-                background-color: var(--first-color);
-                color: #fff;
-                padding: .75rem 2.5rem;
-                font-weight: var(--font-semi);
-                border-radius: .5rem; 
-                transition: .3s;
-            }
-
-            .button:hover{
-                box-shadow: 0px 10px 36px rgba(0,0,0,.15);
-            }
-
-            /* ===== ABOUT =====*/
-            .about__container{
-                row-gap: 2rem;
-                text-align: center;
-            }
-
-            .about__subtitle{
-                margin-bottom: var(--mb-2);
-            }
-
-            .about__img{
-                justify-self: center;
-            }
-
-            .about__img img{
-                width: 200px;
-                border-radius: .5rem;
-                background: #ddd;
-                min-height: 200px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            /* ===== SKILLS =====*/
-            .skills__container{
-                row-gap: 2rem;
-                text-align: center;
-            }
-
-            .skills__subtitle{
-                margin-bottom: var(--mb-2);
-            }
-
-            .skills__text{
-                margin-bottom: var(--mb-4);
-            }
-
-            .skills__data{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                position: relative;
-                font-weight: var(--font-semi);
-                padding: .5rem 1rem;
-                margin-bottom: var(--mb-4);
-                border-radius: .5rem;
-                box-shadow: 0px 4px 25px rgba(14, 36, 49, 0.15);
-            }
-
-            .skills__icon{
-                font-size: 2rem;
-                margin-right: var(--mb-2);
-                color: var(--first-color);
-            }
-
-            .skills__names{
-                display: flex;
-                align-items: center;
-            }
-
-            .skills__bar{
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                background-color: var(--first-color);
-                height: .25rem;
-                border-radius: .5rem;
-                z-index: var(--z-back);
-            }
-
-            .skills__html{
-                width: 95%;
-            }
-            .skills__css{
-                width: 85%;
-            }
-            .skills__js{
-                width: 65%;
-            }
-            .skills__ux{
-                width: 85%;
-            }
-
-            .skills__img{
-                border-radius: .5rem;
-                width: 100%;
-                height: 200px;
-                background: #ddd;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            /* ===== WORK =====*/
-            .work__container{
-                row-gap: 2rem;
-            }
-
-            .work__img{
-                box-shadow: 0px 4px 25px rgba(14, 36, 49, 0.15); 
-                border-radius: .5rem;
-                overflow: hidden;
-                display: block;
-                width: 100%;
-                height: 200px;
-                background: #ddd;
-            }
-
-            .work__img img{
-                transition: 1s;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .work__img img:hover{
-                transform: scale(1.1);
-            }
-
-
-            /* ===== FOOTER =====*/
-            .footer{
-                background-color: var(--second-color);
-                color: #fff;
-                text-align: center;
-                font-weight: var(--font-semi);
-                padding: 2rem 0;
-            }
-
-            .footer__title{
-                font-size: 2rem;
-                margin-bottom: var(--mb-4);
-            }
-
-            .footer__social{
-                margin-bottom: var(--mb-4);
-            }
-
-            .footer__icon{
-                font-size: 1.5rem;
-                color: #fff;
-                margin: 0 var(--mb-2);
-            }
-
-            .footer__copy{
-                font-size: var(--smaller-font-size);
-            }
-
-            /* ===== MEDIA QUERIES=====*/
-            @media screen and (max-width: 320px){
-                .home{
-                    row-gap: 2rem;
-                }
-                .home__img{
-                    width: 200px;
-                }
-            }
-
-            @media screen and (min-width: 576px){
-                .home{
-                    padding: 4rem 0 2rem;
-                }
-                .home__social{
-                    padding-top: 0;
-                    padding-bottom: 2.5rem;
-                    flex-direction: row;
-                    align-self: flex-end;
-                }
-                .home__social-icon{
-                    margin-bottom: 0;
-                    margin-right: var(--mb-4);
-                }
-                .home__img{
-                    width: 300px;
-                    bottom: 25%;
-                }
-
-                .about__container{
-                    grid-template-columns: repeat(2,1fr);
-                    align-items: center;
-                    text-align: initial;
-                }
-
-                .skills__container{
-                    grid-template-columns: .7fr;
-                    justify-content: center;
-                    column-gap: 1rem;
-                }
-
-                .work__container{
-                    grid-template-columns: repeat(2,1fr);
-                    column-gap: 2rem;
-                    padding-top: 2rem;
-                }
-
-            @media screen and (min-width: 768px){
-                body{
-                    margin: 0;
-                }
-                .section{
-                    padding-top: 4rem;
-                    padding-bottom: 3rem;
-                }
-
-                .section-title{
-                    margin-bottom: var(--mb-6);
-                }
-
-                .section-title::after{
-                    width: 80px;
-                    top: 3rem;
-                }
-
-                .nav{
-                    height: calc(var(--header-height) + 1.5rem);
-                }
-                .nav__list{
-                    display: flex;
-                    padding-top: 0;
-                }
-                .nav__item{
-                    margin-left: var(--mb-6);
-                    margin-bottom: 0;
-                }
-                .nav__toggle{
-                    display: none;
-                }
-                .nav__link{
-                    color: var(--second-color);
-                }
-
-                .home{
-                    padding: 8rem 0 2rem;
-                }
-                .home__img{
-                    width: 400px;
-                    bottom: 10%;
-                }
-
-                .about__container{
-                   padding-top: 2rem;
-                }
-                .about__img img{
-                    width: 300px;
-                }
-
-                .skills__container{
-                    grid-template-columns: repeat(2,1fr);
-                    column-gap: 2rem;
-                    align-items: center;
-                    text-align: initial;
-                }
-                .work__container{
-                    grid-template-columns: repeat(3,1fr);
-                    column-gap: 2rem;
-                }
-            }
-
-            @media screen and (min-width: 992px){
-                .bd-grid{
-                    margin-left: auto;
-                    margin-right: auto;
-                }
-                .home{
-                    padding: 10rem 0 2rem;
-                }
-                .home__img{
-                    width: 450px;
-                }
-            }
-
-            /* Placeholder styles for missing images */
-            .placeholder {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: white;
-                font-weight: 600;
-                text-align: center;
-            }
-        </style>
-    </head>
-    <body>
-        <!--===== HEADER =====-->
-        <header class="l-header">
-            <nav class="nav bd-grid">
-                <div>
-                    <a href="#" class="nav__logo">Burim</a>
-                </div>
-
-                <div class="nav__menu" id="nav-menu">
-                    <ul class="nav__list">
-                        <li class="nav__item"><a href="#home" class="nav__link active-link">Start</a></li>
-                        <li class="nav__item"><a href="#about" class="nav__link">Über mich</a></li>
-                        <li class="nav__item"><a href="#skills" class="nav__link">Fähigkeiten</a></li>
-                        <li class="nav__item"><a href="#work" class="nav__link">Projekte</a></li>
-                    </ul>
-                </div>
-
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class='bx bx-menu'></i>
-                </div>
-            </nav>
-        </header>
-
-        <main class="l-main">
-            <!--===== HOME =====-->
-            <section class="home bd-grid" id="home">
-                <div class="home__data">
-                    <h1 class="home__title">Hallo,<br>Ich bin <span class="home__title-color">Burim</span><br> IMS Schüler</h1>
-                </div>
-
-                <div class="home__social">
-                    <a href="#" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
-                    <a href="#" class="home__social-icon"><i class='bx bxl-behance' ></i></a>
-                    <a href="#" class="home__social-icon"><i class='bx bxl-github' ></i></a>
-                </div>
-
-                <div class="home__img">
-                    <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <mask id="mask0" mask-type="alpha">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                        </mask>
-                        <g mask="url(#mask0)">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                        </g>
-                    </svg>
-                </div>
-            </section>
-
-            <!--===== ABOUT =====-->
-            <section class="about section " id="about">
-                <h2 class="section-title">Über mich</h2>
-
-                <div class="about__container bd-grid">
-                    <div class="about__img">
-                         <img src="assets/img/about.jpg" alt="Über mich" class="skills__img placeholder" style="width: 100%; height: 200px;">
-                    </div>
-                    
-                    <div>
-                        <h2 class="about__subtitle">Ich bin Burim</h2>
-                        <p class="about__text">Zurzeit besuche ich die Informatikmittelschule an der Kantonsschule am Brühl und suche nach einer Stelle fürs Langzeitpraktikum.</p>           
-                    </div>                                   
-                </div>
-            </section>
-
-            <!--===== SKILLS =====-->
-            <section class="skills section" id="skills">
-                <h2 class="section-title">Skills</h2>
-
-                <div class="skills__container bd-grid">          
-                    <div>
-                        <h2 class="skills__subtitle">Professionelle Fähigkeiten</h2>
-                        <p class="skills__text">Ich habe in der IMS viele Informatikbereiche in Form von Modulen gelernt.</p>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxl-html5 skills__icon'></i>
-                                <span class="skills__name">HTML5</span>
-                            </div>
-                            <div class="skills__bar skills__html"></div>
-                            <div>
-                                <span class="skills__percentage">80%</span>
-                            </div>
-                        </div>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxl-css3 skills__icon'></i>
-                                <span class="skills__name">CSS</span>
-                            </div>
-                            <div class="skills__bar skills__css"></div>
-                            <div>
-                                <span class="skills__percentage">75%</span>
-                            </div>
-                        </div>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxl-javascript skills__icon' ></i>
-                                <span class="skills__name">JAVASCRIPT</span>
-                            </div>
-                            <div class="skills__bar skills__js"></div>
-                            <div>
-                                <span class="skills__percentage">70%</span>
-                            </div>
-                        </div>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxs-paint react__icon'></i>
-                                <span class="skills__name">React</span>
-                            </div>
-                            <div class="skills__bar skills__ux"></div>
-                            <div>
-                                <span class="skills__percentage">65%</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>              
-                        <img src="assets/img/skills.png" alt="Fähigkeiten" class="skills__img placeholder" style="width: 50%; height: 50%;">
-                    </div>
-                </div>
-            </section>
-
-            <!--===== WORK =====-->
-            <section class="work section" id="work">
-                <h2 class="section-title">Projekte</h2>
-
-                <div class="work__container bd-grid">
-                    <a href="#" class="work__img">
-                        <div class="placeholder" style="width: 100%; height: 200px;">Projekt 1</div>
-                    </a>
-                    <a href="#" class="work__img">
-                        <div class="placeholder" style="width: 100%; height: 200px;">Projekt 2</div>
-                    </a>
-                    <a href="#" class="work__img">
-                        <div class="placeholder" style="width: 100%; height: 200px;">Projekt 3</div>
-                    </a>
-                    <a href="#" class="work__img">
-                        <div class="placeholder" style="width: 100%; height: 200px;">Projekt 4</div>
-                    </a>
-                    <a href="#" class="work__img">
-                        <div class="placeholder" style="width: 100%; height: 200px;">Projekt 5</div>
-                    </a>
-                    <a href="#" class="work__img">
-                        <div class="placeholder" style="width: 100%; height: 200px;">Projekt 6</div>
-                    </a>
-                </div>
-            </section>
-
-        <!--===== FOOTER =====-->
-        <footer class="footer">
-            <p class="footer__title">Burim</p>
-            <div class="footer__social">
-                <a href="#" class="footer__icon"><i class='bx bxl-facebook' ></i></a>
-                <a href="#" class="footer__icon"><i class='bx bxl-instagram' ></i></a>
-                <a href="#" class="footer__icon"><i class='bx bxl-twitter' ></i></a>
+<html lang="de" data-theme="light" data-lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Burim Maliki — Portfolio</title>
+  <meta name="description" content="Portfolio von Burim Maliki: angehender Applikationsentwickler an der Informatikmittelschule, auf der Suche nach einem einjährigen Praktikum in Applikationsentwicklung.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f5f2">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101216">
+
+  <script>
+    /* Theme + language before first paint (no flash of wrong mode) */
+    (function () {
+      try {
+        var t = localStorage.getItem('bm-theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+        var l = localStorage.getItem('bm-lang');
+        var lang = l === 'en' ? 'en' : 'de';
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.lang = lang;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.documentElement.lang = 'de';
+      }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <noscript>
+    <style>[data-reveal] { opacity: 1; transform: none; }</style>
+  </noscript>
+</head>
+
+<body>
+  <a class="skip-link" href="#start" data-i18n="a11y.skip">Zum Inhalt springen</a>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#start" data-i18n-aria="nav.brandAria" aria-label="Burim Maliki — zum Seitenanfang">
+        <span class="brand-mark" aria-hidden="true">BM</span>
+        <span class="brand-name">Burim&nbsp;Maliki</span>
+      </a>
+
+      <nav class="site-nav" id="site-nav" aria-label="Hauptnavigation" data-i18n-aria="nav.label">
+        <ul>
+          <li><a class="nav-link" href="#start" data-i18n="nav.start">Start</a></li>
+          <li><a class="nav-link" href="#links" data-i18n="nav.links">Links</a></li>
+          <li><a class="nav-link" href="#ims" data-i18n="nav.ims">IMS</a></li>
+          <li><a class="nav-link" href="#skills" data-i18n="nav.skills">Skills</a></li>
+          <li><a class="nav-link" href="#projekte" data-i18n="nav.projects">Projekte</a></li>
+          <li><a class="nav-link" href="#kontakt" data-i18n="nav.contact">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-controls">
+        <div class="lang-switch" role="group" aria-label="Sprache / Language">
+          <button type="button" class="lang-btn" data-lang="de" aria-pressed="true">DE</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Dunkles Design aktivieren">
+          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+          </svg>
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2"/>
+            <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M19.1 4.9l-1.6 1.6M6.5 17.5l-1.6 1.6"/>
+          </svg>
+        </button>
+        <button type="button" class="icon-btn menu-btn" id="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menü öffnen">
+          <svg class="icon icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+          <svg class="icon icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ================= HERO ================= -->
+    <section id="start" class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy" data-reveal>
+          <p class="eyebrow" data-i18n="hero.eyebrow">Portfolio · Informatikmittelschule</p>
+          <h1 id="hero-title">Burim&nbsp;Maliki<span class="dot">.</span></h1>
+          <p class="hero-lead">
+            <strong data-i18n="hero.leadStrong">Angehender Applikationsentwickler.</strong>
+            <span data-i18n="hero.lead">Ich besuche die Informatikmittelschule (IMS) und suche ein einjähriges Praktikum in Applikationsentwicklung. Mein Fokus: Web und Fullstack. Mein Interesse: Sicherheit.</span>
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://www.linkedin.com/in/burim-maliki-932824349/" target="_blank" rel="noopener noreferrer" data-i18n-aria="hero.linkedinAria" aria-label="LinkedIn-Profil öffnen (neuer Tab)">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/>
+              </svg>
+              <span data-i18n="hero.ctaLinkedin">LinkedIn</span>
+            </a>
+            <a class="btn btn-secondary" href="https://github.com/BurimMaliki" target="_blank" rel="noopener noreferrer" data-i18n-aria="hero.githubAria" aria-label="GitHub-Profil öffnen (neuer Tab)">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
+              </svg>
+              <span data-i18n="hero.ctaGithub">GitHub</span>
+            </a>
+          </div>
+          <p class="hero-meta" aria-hidden="true">
+            <span data-i18n="hero.meta1">Informatikmittelschule (IMS)</span>
+            <span data-i18n="hero.meta2">Applikationsentwicklung</span>
+            <span data-i18n="hero.meta3">Web · Fullstack · Security</span>
+          </p>
+        </div>
+
+        <aside class="facts-card card" data-reveal style="--reveal-delay: 120ms" aria-label="Auf einen Blick" data-i18n-aria="hero.factsAria">
+          <p class="facts-title" data-i18n="hero.factsTitle">Auf einen Blick</p>
+          <dl class="facts">
+            <div class="fact">
+              <dt data-i18n="hero.fStatusLabel">Status</dt>
+              <dd data-i18n="hero.fStatus">Auf der Suche nach dem Praktikumsjahr</dd>
             </div>
-            <p class="footer__copy">&#169; Alle Rechte vorbehalten</p>
-        </footer>
+            <div class="fact">
+              <dt data-i18n="hero.fEducationLabel">Ausbildung</dt>
+              <dd data-i18n="hero.fEducation">Informatikmittelschule (IMS)</dd>
+            </div>
+            <div class="fact">
+              <dt data-i18n="hero.fFocusLabel">Schwerpunkt</dt>
+              <dd data-i18n="hero.fFocus">Applikationsentwicklung</dd>
+            </div>
+            <div class="fact">
+              <dt data-i18n="hero.fInterestLabel">Interessen</dt>
+              <dd data-i18n="hero.fInterest">Web · Fullstack · Security</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
 
-        <script>
-            /*===== MENU SHOW =====*/ 
-            const showMenu = (toggleId, navId) =>{
-                const toggle = document.getElementById(toggleId),
-                nav = document.getElementById(navId)
+    <!-- ================= LINKS ================= -->
+    <section id="links" aria-labelledby="links-title">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow" data-i18n="links.eyebrow">01 · Profile &amp; Projekte</p>
+          <h2 id="links-title" data-i18n="links.title">Wichtige Links</h2>
+          <p class="lead" data-i18n="links.lead">Alle relevanten Profile und Projekte an einem Ort.</p>
+        </div>
 
-                if(toggle && nav){
-                    toggle.addEventListener('click', ()=>{
-                        nav.classList.toggle('show')
-                    })
-                }
-            }
-            showMenu('nav-toggle','nav-menu')
+        <div class="links-grid">
+          <a class="link-card" href="https://github.com/BurimMaliki" target="_blank" rel="noopener noreferrer" data-reveal data-i18n-aria="links.githubAria" aria-label="GitHub öffnen (neuer Tab)">
+            <span class="link-card-top">
+              <span class="link-icon" aria-hidden="true">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              </span>
+              <svg class="icon link-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </span>
+            <h3 data-i18n="links.githubTitle">GitHub</h3>
+            <p data-i18n="links.githubDesc">Code, Projekte und Experimente.</p>
+            <span class="link-domain">github.com/BurimMaliki</span>
+          </a>
 
-            /*==================== REMOVE MENU MOBILE ====================*/
-            const navLink = document.querySelectorAll('.nav__link')
+          <a class="link-card" href="https://www.linkedin.com/in/burim-maliki-932824349/" target="_blank" rel="noopener noreferrer" data-reveal style="--reveal-delay: 60ms" data-i18n-aria="links.linkedinAria" aria-label="LinkedIn öffnen (neuer Tab)">
+            <span class="link-card-top">
+              <span class="link-icon" aria-hidden="true">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+              </span>
+              <svg class="icon link-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </span>
+            <h3 data-i18n="links.linkedinTitle">LinkedIn</h3>
+            <p data-i18n="links.linkedinDesc">Profil, Netzwerk und Kontaktaufnahme.</p>
+            <span class="link-domain">linkedin.com/in/burim-maliki-932824349</span>
+          </a>
 
-            function linkAction(){
-                const navMenu = document.getElementById('nav-menu')
-                navMenu.classList.remove('show')
-            }
-            navLink.forEach(n => n.addEventListener('click', linkAction))
+          <a class="link-card" href="https://www.cyberskills.li/robot" target="_blank" rel="noopener noreferrer" data-reveal style="--reveal-delay: 120ms" data-i18n-aria="links.robofightAria" aria-label="RoboFight öffnen (neuer Tab)">
+            <span class="link-card-top">
+              <span class="link-icon" aria-hidden="true">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 6H8.5M12 6h3.5"/><rect x="4.5" y="8.5" width="15" height="10.5" rx="2.5"/><path d="M9.6 12.6h.01M14.4 12.6h.01M2.5 13h2M19.5 13h2"/></svg>
+              </span>
+              <svg class="icon link-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </span>
+            <h3 data-i18n="links.robofightTitle">RoboFight</h3>
+            <p data-i18n="links.robofightDesc">Strategie-Spiel mit Robotern — Stärke, Tempo, Robustheit.</p>
+            <span class="link-domain">cyberskills.li/robot</span>
+          </a>
 
-            /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
-            const sections = document.querySelectorAll('section[id]')
+          <a class="link-card" href="https://www.cyberskills.li/" target="_blank" rel="noopener noreferrer" data-reveal style="--reveal-delay: 180ms" data-i18n-aria="links.cyberskillsAria" aria-label="Cyberskills öffnen (neuer Tab)">
+            <span class="link-card-top">
+              <span class="link-icon" aria-hidden="true">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="4" r="1.7"/><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/><circle cx="4" cy="19.5" r="1.7"/><circle cx="9" cy="19.5" r="1.7"/><circle cx="15" cy="19.5" r="1.7"/><circle cx="20" cy="19.5" r="1.7"/><path d="M11.4 5.4L6 10.6M12 5.6l.3 4.7M18 10.6l-5.2-5M4.9 13.3l-.3 4.5M9.4 18.2l-3.4-3.2M14.6 18.2l3.4-3.2M19.1 17.8l-.3-4.5"/></svg>
+              </span>
+              <svg class="icon link-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </span>
+            <h3 data-i18n="links.cyberskillsTitle">Cyberskills</h3>
+            <p data-i18n="links.cyberskillsDesc">Lernkonzept für Cybersicherheit mit eigenem Skill-Tree.</p>
+            <span class="link-domain">cyberskills.li</span>
+          </a>
+        </div>
+      </div>
+    </section>
 
-            const scrollActive = () =>{
-                const scrollDown = window.scrollY
+    <!-- ================= IMS ================= -->
+    <section id="ims" aria-labelledby="ims-title">
+      <div class="container ims-grid">
+        <div class="ims-copy" data-reveal>
+          <p class="eyebrow" data-i18n="ims.eyebrow">02 · Bildungsweg</p>
+          <h2 id="ims-title" data-i18n="ims.title">Informatikmittelschule (IMS)</h2>
+          <p data-i18n="ims.p1">Die Informatikmittelschule (IMS) ist ein vierjähriger Bildungsgang in der Schweiz: drei Jahre Schule, ein Jahr Praktikum — mit Abschluss eidgenössisches Fähigkeitszeugnis (EFZ) als Applikationsentwickler:in plus Berufsmaturität.</p>
+          <p data-i18n-html="ims.p2">Der Unterricht verbindet Allgemeinbildung mit Informatik — von Programmierung und Webentwicklung über Datenbanken und Netzwerke bis zu Projektmanagement. Welche Module zum EFZ führen, zeigt der offizielle <a class="text-link" href="https://www.modulbaukasten.ch/" target="_blank" rel="noopener noreferrer">Modulbaukasten</a>. Angeboten wird die IMS unter anderem an der <a class="text-link" href="https://www.ksb-sg.ch/ims" target="_blank" rel="noopener noreferrer">Kanti am Brühl (KSB)</a> in St. Gallen.</p>
+        </div>
 
-              sections.forEach(current =>{
-                    const sectionHeight = current.offsetHeight,
-                          sectionTop = current.offsetTop - 58,
-                          sectionId = current.getAttribute('id'),
-                          sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
-                    
-                    if(scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight){
-                        sectionsClass.classList.add('active-link')
-                    }else{
-                        sectionsClass.classList.remove('active-link')
-                    }                                                    
-                })
-            }
-            window.addEventListener('scroll', scrollActive)
-        </script>
-    </body>
+        <aside class="ims-card card" data-reveal style="--reveal-delay: 120ms" aria-label="Lerninhalte der IMS" data-i18n-aria="ims.cardAria">
+          <h3 data-i18n="ims.learnTitle">Was man an der IMS lernt</h3>
+          <ul class="chip-list">
+            <li class="chip" data-i18n="ims.chip1">Programmierung</li>
+            <li class="chip" data-i18n="ims.chip2">Webentwicklung</li>
+            <li class="chip" data-i18n="ims.chip3">Datenbanken</li>
+            <li class="chip" data-i18n="ims.chip4">Netzwerke &amp; Betriebssysteme</li>
+            <li class="chip" data-i18n="ims.chip5">Projektmanagement</li>
+            <li class="chip" data-i18n="ims.chip6">Agile Methoden</li>
+            <li class="chip" data-i18n="ims.chip7">Mathematik &amp; Naturwissenschaften</li>
+            <li class="chip" data-i18n="ims.chip8">Sprachen &amp; Wirtschaft</li>
+            <li class="chip" data-i18n="ims.chip9">Berufsmaturität</li>
+          </ul>
+          <div class="ims-links">
+            <a class="ims-link" href="https://www.modulbaukasten.ch/" target="_blank" rel="noopener noreferrer" data-i18n-aria="ims.modulesAria" aria-label="Modulbaukasten öffnen (neuer Tab)">
+              <span>
+                <span class="ims-link-title" data-i18n="ims.modulesTitle">Modulbaukasten</span><br>
+                <span class="ims-link-desc" data-i18n="ims.modulesDesc">Offizielle Modulübersicht der IMS</span>
+              </span>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+            <a class="ims-link" href="https://www.ksb-sg.ch/ims" target="_blank" rel="noopener noreferrer" data-i18n-aria="ims.ksbAria" aria-label="Kanti am Brühl öffnen (neuer Tab)">
+              <span>
+                <span class="ims-link-title" data-i18n="ims.ksbTitle">Kanti am Brühl (KSB)</span><br>
+                <span class="ims-link-desc" data-i18n="ims.ksbDesc">Informatikmittelschule in St. Gallen</span>
+              </span>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow" data-i18n="skills.eyebrow">03 · Kompetenzen</p>
+          <h2 id="skills-title" data-i18n="skills.title">Skills</h2>
+          <p class="lead" data-i18n-html="skills.lead">Die IMS hat mir eine solide Grundlage gegeben — von den Grundlagen der Programmierung bis zu Datenbanken, Netzwerken und Webentwicklung. Die genauen Inhalte sind im <a class="text-link" href="https://www.modulbaukasten.ch/" target="_blank" rel="noopener noreferrer">Modulbaukasten</a> dokumentiert.</p>
+        </div>
+
+        <div data-reveal>
+          <div class="tabs" role="tablist" aria-label="Skill-Kategorien" data-i18n-aria="skills.tabsAria">
+            <button type="button" class="tab" role="tab" id="tab-langs" aria-controls="panel-langs" aria-selected="true" tabindex="0" data-i18n="skills.tab1">Programmiersprachen</button>
+            <button type="button" class="tab" role="tab" id="tab-areas" aria-controls="panel-areas" aria-selected="false" tabindex="-1" data-i18n="skills.tab2">Anwendungsbereiche</button>
+            <button type="button" class="tab" role="tab" id="tab-soft" aria-controls="panel-soft" aria-selected="false" tabindex="-1" data-i18n="skills.tab3">Soft Skills</button>
+          </div>
+
+          <div class="tabpanel" id="panel-langs" role="tabpanel" aria-labelledby="tab-langs" tabindex="0">
+            <ul class="skill-grid">
+              <li class="skill">
+                <span class="skill-index">01</span>
+                <h3 data-i18n="skills.langJs">JavaScript</h3>
+                <p data-i18n="skills.langJsDesc">Webanwendungen &amp; interaktive Interfaces</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">02</span>
+                <h3 data-i18n="skills.langHtml">HTML</h3>
+                <p data-i18n="skills.langHtmlDesc">Semantisches Markup &amp; zugängliche Struktur</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">03</span>
+                <h3 data-i18n="skills.langCss">CSS</h3>
+                <p data-i18n="skills.langCssDesc">Layout, Responsive Design &amp; Design-Systeme</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">04</span>
+                <h3 data-i18n="skills.langC">C</h3>
+                <p data-i18n="skills.langCDesc">Systemnahe Grundlagen &amp; Speicherverwaltung</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">05</span>
+                <h3 data-i18n="skills.langCpp">C++</h3>
+                <p data-i18n="skills.langCppDesc">Objektorientierte Programmierung</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">06</span>
+                <h3 data-i18n="skills.langJava">Java</h3>
+                <p data-i18n="skills.langJavaDesc">Stark typisierte Anwendungen</p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="tabpanel" id="panel-areas" role="tabpanel" aria-labelledby="tab-areas" tabindex="0" hidden>
+            <ul class="skill-grid">
+              <li class="skill">
+                <span class="skill-index">01</span>
+                <h3 data-i18n="skills.areaFrontend">Frontend</h3>
+                <p data-i18n="skills.areaFrontendDesc">Interfaces, Usability &amp; Barrierefreiheit</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">02</span>
+                <h3 data-i18n="skills.areaBackend">Backend</h3>
+                <p data-i18n="skills.areaBackendDesc">APIs, Services &amp; Geschäftslogik</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">03</span>
+                <h3 data-i18n="skills.areaFullstack">Fullstack</h3>
+                <p data-i18n="skills.areaFullstackDesc">Von der Datenbank bis zum UI</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">04</span>
+                <h3 data-i18n="skills.areaSql">SQL &amp; NoSQL Datenbanken</h3>
+                <p data-i18n="skills.areaSqlDesc">Relationale &amp; dokumentenbasierte Systeme</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">05</span>
+                <h3 data-i18n="skills.areaContainer">Container</h3>
+                <p data-i18n="skills.areaContainerDesc">Docker &amp; isolierte Laufzeitumgebungen</p>
+              </li>
+              <li class="skill">
+                <span class="skill-index">06</span>
+                <h3 data-i18n="skills.areaAi">AI Skills</h3>
+                <p data-i18n="skills.areaAiDesc">KI-gestützte Tools &amp; Workflows</p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="tabpanel" id="panel-soft" role="tabpanel" aria-labelledby="tab-soft" tabindex="0" hidden>
+            <ul class="soft-list">
+              <li class="soft-item">
+                <span class="soft-index">01</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft1">Teamfähigkeit</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft1Desc">Gemeinsam Lösungen erarbeiten</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">02</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft2">Überzeugungsfähigkeit</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft2Desc">Ideen klar und sachlich vertreten</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">03</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft3">Feedback geben &amp; annehmen</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft3Desc">Offen für konstruktive Kritik</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">04</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft4">Empathie</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft4Desc">Perspektiven anderer verstehen</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">05</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft5">Toleranz</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft5Desc">Unterschiedliche Sichtweisen respektieren</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">06</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft6">Neugier</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft6Desc">Neues verstehen und ausprobieren</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">07</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft7">Strategisches Denken</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft7Desc">Probleme in Schritte zerlegen</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">08</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft8">Geduld</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft8Desc">Dranbleiben bei komplexen Aufgaben</span>
+                </span>
+              </li>
+              <li class="soft-item">
+                <span class="soft-index">09</span>
+                <span>
+                  <span class="soft-name" data-i18n="skills.soft9">Verantwortungsübernahme</span><br>
+                  <span class="soft-desc" data-i18n="skills.soft9Desc">Für Ergebnisse einstehen</span>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section id="projekte" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow" data-i18n="projects.eyebrow">04 · Arbeit</p>
+          <h2 id="projects-title" data-i18n="projects.title">Projekte</h2>
+          <p class="lead" data-i18n="projects.lead">Zwei Projekte, zwei Ansätze: ein spielbares Strategie-Spiel und das Konzept für eine Lernplattform.</p>
+        </div>
+
+        <!-- RoboFight -->
+        <article class="project project-rf" data-reveal aria-labelledby="rf-title">
+          <div class="project-copy">
+            <span class="project-tag" data-i18n="projects.rfTag">Spiel · Web</span>
+            <h3 id="rf-title" data-i18n="projects.rfTitle">RoboFight</h3>
+            <p data-i18n="projects.rfDesc">Zwei Spieler bauen Roboter aus drei Werten — Stärke, Tempo und Robustheit — und lassen sie gegeneinander antreten. Wie bei Schere, Stein, Papier kontert jeder Wert einen anderen; eine spezielle Kampfformel entscheidet den Kampf.</p>
+            <ul class="fact-chips" aria-label="Eigenschaften von RoboFight" data-i18n-aria="projects.rfChipsAria">
+              <li class="fact-chip" data-i18n="projects.rfChip1">2 Spieler</li>
+              <li class="fact-chip" data-i18n="projects.rfChip2">Stärke · Tempo · Robustheit</li>
+              <li class="fact-chip" data-i18n="projects.rfChip3">Typ-System</li>
+              <li class="fact-chip" data-i18n="projects.rfChip4">Kampfformel</li>
+            </ul>
+            <a class="project-cta" href="https://www.cyberskills.li/robot" target="_blank" rel="noopener noreferrer" data-i18n-aria="projects.rfCtaAria" aria-label="RoboFight ansehen (neuer Tab)">
+              <span data-i18n="projects.rfCta">RoboFight ansehen</span>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+
+          <div class="project-visual" aria-label="RoboFight Mechanik" data-i18n-aria="projects.rfVisualAria">
+            <p class="visual-label" data-i18n="projects.rfStatsTitle">Roboter-Werte</p>
+            <div class="stat-row">
+              <span class="stat-name" data-i18n="projects.rfStatStrength">Stärke</span>
+              <span class="stat-track" aria-hidden="true"><span class="stat-fill" style="width: 80%"></span></span>
+              <span class="stat-value" aria-hidden="true">8</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-name" data-i18n="projects.rfStatSpeed">Tempo</span>
+              <span class="stat-track" aria-hidden="true"><span class="stat-fill" style="width: 70%"></span></span>
+              <span class="stat-value" aria-hidden="true">7</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-name" data-i18n="projects.rfStatDurability">Robustheit</span>
+              <span class="stat-track" aria-hidden="true"><span class="stat-fill" style="width: 60%"></span></span>
+              <span class="stat-value" aria-hidden="true">6</span>
+            </div>
+
+            <svg class="type-diagram" viewBox="0 0 320 190" role="img" aria-labelledby="rf-diagram-title" aria-hidden="false">
+              <title id="rf-diagram-title" data-i18n="projects.rfDiagramAria">Typ-System von RoboFight: Stärke schlägt Tempo, Tempo schlägt Robustheit, Robustheit schlägt Stärke.</title>
+              <defs>
+                <marker id="rf-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                  <path d="M0 0L10 5L0 10z" fill="var(--rf-accent)"/>
+                </marker>
+              </defs>
+              <path class="diagram-edge" d="M157 48 L62 154" marker-end="url(#rf-arrow)"/>
+              <path class="diagram-edge" d="M78 172 L242 172" marker-end="url(#rf-arrow)"/>
+              <path class="diagram-edge" d="M260 150 L166 50" marker-end="url(#rf-arrow)"/>
+              <circle class="diagram-node" cx="160" cy="38" r="22"/>
+              <text class="diagram-node-text" x="160" y="43" text-anchor="middle" data-i18n="projects.rfStatStrength">Stärke</text>
+              <circle class="diagram-node" cx="52" cy="164" r="22"/>
+              <text class="diagram-node-text" x="52" y="169" text-anchor="middle" data-i18n="projects.rfStatSpeed">Tempo</text>
+              <circle class="diagram-node" cx="268" cy="164" r="22"/>
+              <text class="diagram-node-text" x="268" y="169" text-anchor="middle" data-i18n="projects.rfStatDurability">Robustheit</text>
+            </svg>
+            <p class="diagram-caption" data-i18n="projects.rfDiagramCaption">Typ-System: schlägt im Kreis</p>
+
+            <div class="formula">
+              <p class="formula-label" data-i18n="projects.rfFormulaCaption">Kampfformel (vereinfacht)</p>
+              <code class="formula-code" data-i18n="projects.rfFormula">Schaden = Stärke × Typ-Faktor − Robustheit</code>
+            </div>
+          </div>
+        </article>
+
+        <!-- Cyberskills -->
+        <article class="project project-cs" data-reveal aria-labelledby="cs-title">
+          <div class="project-copy">
+            <span class="project-tag" data-i18n="projects.csTag">Konzept · Blueprint</span>
+            <h3 id="cs-title" data-i18n="projects.csTitle">Cyberskills</h3>
+            <p data-i18n="projects.csDesc">Das Konzept für eine Lernplattform, die Cybersicherheit verständlich macht: eine klar definierte Zielgruppe, messbare Lernziele und ein eigenes Skill-Tree-System, das den Lernfortschritt sichtbar macht.</p>
+            <ul class="fact-chips" aria-label="Eigenschaften von Cyberskills" data-i18n-aria="projects.csChipsAria">
+              <li class="fact-chip" data-i18n="projects.csChip1">Zielgruppe definiert</li>
+              <li class="fact-chip" data-i18n="projects.csChip2">Messbare Lernziele</li>
+              <li class="fact-chip" data-i18n="projects.csChip3">Skill-Tree</li>
+              <li class="fact-chip" data-i18n="projects.csChip4">Konzeptphase</li>
+            </ul>
+            <dl class="project-dl">
+              <div>
+                <dt data-i18n="projects.csAudienceLabel">Zielgruppe</dt>
+                <dd data-i18n="projects.csAudience">Jugendliche und Einsteiger:innen, die verstehen wollen, wie Angriffe funktionieren und wie man sich schützt.</dd>
+              </div>
+              <div>
+                <dt data-i18n="projects.csOutcomesLabel">Lernziele</dt>
+                <dd data-i18n="projects.csOutcomes">Netzwerke, Angriffsmethoden und Verteidigung im Alltag verstehen und anwenden.</dd>
+              </div>
+              <div>
+                <dt data-i18n="projects.csTreeLabel">Skill-Tree-System</dt>
+                <dd data-i18n="projects.csTree">Ein eigener Fähigkeiten-Baum, der Fortschritt sichtbar macht und motiviert.</dd>
+              </div>
+            </dl>
+            <a class="project-cta" href="https://www.cyberskills.li/" target="_blank" rel="noopener noreferrer" data-i18n-aria="projects.csCtaAria" aria-label="Cyberskills ansehen (neuer Tab)">
+              <span data-i18n="projects.csCta">Cyberskills ansehen</span>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+
+          <div class="project-visual" aria-label="Cyberskills Skill-Tree" data-i18n-aria="projects.csVisualAria">
+            <p class="visual-label" data-i18n="projects.csTreeTitle">Skill-Tree-System</p>
+            <svg class="tree-diagram" viewBox="0 0 320 200" role="img" aria-labelledby="cs-diagram-title" aria-hidden="false">
+              <title id="cs-diagram-title" data-i18n="projects.csDiagramAria">Skill-Tree von Cyberskills: vom Start-Modul über Grundlagen, Netzwerke, Angriffe und Verteidigung.</title>
+              <path class="tree-line" d="M160 40 L52 96"/>
+              <path class="tree-line" d="M160 40 L124 96"/>
+              <path class="tree-line" d="M160 40 L196 96"/>
+              <path class="tree-line" d="M160 40 L268 96"/>
+              <path class="tree-line" d="M52 106 L30 168"/>
+              <path class="tree-line" d="M52 106 L74 168"/>
+              <path class="tree-line" d="M124 106 L102 168"/>
+              <path class="tree-line" d="M124 106 L146 168"/>
+              <path class="tree-line" d="M196 106 L174 168"/>
+              <path class="tree-line" d="M196 106 L218 168"/>
+              <path class="tree-line" d="M268 106 L246 168"/>
+              <path class="tree-line" d="M268 106 L290 168"/>
+              <circle class="tree-root" cx="160" cy="34" r="13"/>
+              <text class="tree-root-text" x="160" y="38" text-anchor="middle" data-i18n="projects.csTreeRoot">Start</text>
+              <circle class="tree-node" cx="52" cy="100" r="9"/>
+              <text class="tree-node-text" x="52" y="124" text-anchor="middle" data-i18n="projects.csTreeN1">Grundlagen</text>
+              <circle class="tree-node" cx="124" cy="100" r="9"/>
+              <text class="tree-node-text" x="124" y="124" text-anchor="middle" data-i18n="projects.csTreeN2">Netzwerke</text>
+              <circle class="tree-node" cx="196" cy="100" r="9"/>
+              <text class="tree-node-text" x="196" y="124" text-anchor="middle" data-i18n="projects.csTreeN3">Angriffe</text>
+              <circle class="tree-node" cx="268" cy="100" r="9"/>
+              <text class="tree-node-text" x="268" y="124" text-anchor="middle" data-i18n="projects.csTreeN4">Verteidigung</text>
+              <circle class="tree-leaf" cx="30" cy="168" r="3.2"/>
+              <circle class="tree-leaf" cx="74" cy="168" r="3.2"/>
+              <circle class="tree-leaf" cx="102" cy="168" r="3.2"/>
+              <circle class="tree-leaf" cx="146" cy="168" r="3.2"/>
+              <circle class="tree-leaf" cx="174" cy="168" r="3.2"/>
+              <circle class="tree-leaf" cx="218" cy="168" r="3.2"/>
+              <circle class="tree-leaf" cx="246" cy="168" r="3.2"/>
+              <circle class="tree-leaf" cx="290" cy="168" r="3.2"/>
+            </svg>
+            <p class="diagram-caption" data-i18n="projects.csTreeCaption">Skill-Tree — Fortschritt sichtbar machen</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="kontakt" aria-labelledby="contact-title">
+      <div class="container contact-grid">
+        <div class="contact-copy" data-reveal>
+          <p class="eyebrow" data-i18n="contact.eyebrow">05 · Kontakt</p>
+          <h2 id="contact-title" data-i18n="contact.title">Schreib mir.</h2>
+          <p data-i18n="contact.lead">Offen für Praktikumsanfragen, Projektideen und Feedback.</p>
+          <p class="note" data-i18n-html="contact.note">Schneller geht es über <a class="text-link" href="https://www.linkedin.com/in/burim-maliki-932824349/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
+        </div>
+
+        <form class="contact-form" id="contact-form" novalidate data-reveal style="--reveal-delay: 120ms" aria-label="Kontaktformular" data-i18n-aria="contact.formAria">
+          <div class="form-banner" id="form-banner" role="status" aria-live="polite" hidden>
+            <svg class="icon banner-icon icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+            <svg class="icon banner-icon icon-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4.5M12 16h.01"/></svg>
+            <div class="banner-text">
+              <p class="banner-title" id="form-banner-title"></p>
+              <p class="banner-body" id="form-banner-body"></p>
+            </div>
+            <button type="button" class="banner-close" id="banner-close" aria-label="Meldung schliessen" data-i18n-aria="contact.dismissAria">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+          </div>
+
+          <div class="field">
+            <label for="contact-email" data-i18n="contact.emailLabel">E-Mail-Adresse</label>
+            <input type="email" id="contact-email" name="email" autocomplete="email" maxlength="254" placeholder="name@beispiel.ch" data-i18n-placeholder="contact.emailPlaceholder" required>
+            <p class="field-error" id="contact-email-error" hidden>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4.5M12 16h.01"/></svg>
+              <span></span>
+            </p>
+          </div>
+
+          <div class="field">
+            <label for="contact-message" data-i18n="contact.messageLabel">Nachricht</label>
+            <textarea id="contact-message" name="message" rows="6" maxlength="2000" placeholder="Worum geht es?" data-i18n-placeholder="contact.messagePlaceholder" required></textarea>
+            <p class="field-error" id="contact-message-error" hidden>
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4.5M12 16h.01"/></svg>
+              <span></span>
+            </p>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-submit" id="contact-submit">
+            <span class="spinner" id="contact-spinner" aria-hidden="true" hidden></span>
+            <span id="contact-submit-label" data-i18n="contact.submit">Nachricht senden</span>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">BM</span>
+          Burim&nbsp;Maliki
+        </p>
+        <p class="footer-tagline" data-i18n="footer.tagline">Angehender Applikationsentwickler · Informatikmittelschule</p>
+      </div>
+      <div class="footer-links">
+        <a class="footer-link" href="https://github.com/BurimMaliki" target="_blank" rel="noopener noreferrer" data-i18n-aria="footer.githubAria" aria-label="GitHub öffnen (neuer Tab)">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          GitHub
+        </a>
+        <a class="footer-link" href="https://www.linkedin.com/in/burim-maliki-932824349/" target="_blank" rel="noopener noreferrer" data-i18n-aria="footer.linkedinAria" aria-label="LinkedIn öffnen (neuer Tab)">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <div class="footer-meta">
+        <span data-i18n="footer.rights">© 2026 Burim Maliki</span>
+        <span data-i18n="footer.built">HTML · CSS · Vanilla JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button type="button" class="to-top" id="to-top" aria-label="Nach oben scrollen" data-i18n-aria="a11y.toTop">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/></svg>
+  </button>
+
+
+  <script src="assets/js/main.js" defer></script>
+</body>
 </html>
