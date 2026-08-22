@@ -32,7 +32,17 @@
   --rf-panel: rgba(255, 255, 255, 0.045);
   --rf-panel-border: rgba(255, 255, 255, 0.10);
 
-  /* project tones — Cyberskills (dark green, clean hacker tone) */
+      /* project tones — FoodSync (plant green, kitchen tone) */
+      --fs-bg-1: #22442d;
+      --fs-bg-2: #142a1a;
+      --fs-border: rgba(255, 255, 255, 0.12);
+      --fs-accent: #e7b271;
+      --fs-text: #eef6ec;
+      --fs-muted: rgba(238, 246, 236, 0.75);
+      --fs-panel: rgba(255, 255, 255, 0.05);
+      --fs-panel-border: rgba(255, 255, 255, 0.10);
+
+      /* project tones — Cyberskills (dark green, clean hacker tone) */
   --cs-bg-1: #0c2419;
   --cs-bg-2: #081a12;
   --cs-border: rgba(255, 255, 255, 0.12);
@@ -714,6 +724,12 @@ section { padding-block: var(--sp-9); }
   border-color: var(--cs-border);
 }
 
+.project-fs {
+  background: linear-gradient(155deg, var(--fs-bg-1), var(--fs-bg-2));
+  color: var(--fs-text);
+  border-color: var(--fs-border);
+}
+
 .project-tag {
   display: inline-flex;
   padding: 4px 10px;
@@ -862,7 +878,56 @@ section { padding-block: var(--sp-9); }
   font-size: var(--text-xs);
   color: var(--rf-muted);
 }
-.project-cs .diagram-caption { color: var(--cs-muted); }
+    .project-cs .diagram-caption { color: var(--cs-muted); }
+
+    /* FoodSync overrides (warm tone) */
+    .project-fs .project-tag { border-color: var(--fs-border); color: var(--fs-accent); }
+    .project-fs .project-copy > p { color: var(--fs-muted); }
+    .project-fs .fact-chip { border-color: var(--fs-border); background: var(--fs-panel); color: var(--fs-text); }
+    .project-fs .project-cta { background: var(--fs-accent); color: var(--fs-bg-2); }
+    .project-fs .project-visual { background: var(--fs-panel); border-color: var(--fs-panel-border); }
+    .project-fs .visual-label { color: var(--fs-muted); }
+    .project-fs .stat-name { color: var(--fs-text); }
+    .project-fs .stat-fill { background: var(--fs-accent); }
+    .project-fs .stat-value { color: var(--fs-muted); }
+    .project-fs .formula { border-color: var(--fs-panel-border); }
+    .project-fs .formula-label { color: var(--fs-muted); }
+    .project-fs .formula-code { color: var(--fs-text); }
+    .project-fs .diagram-caption { color: var(--fs-muted); }
+    .project-fs .project-dl dt { color: var(--fs-accent); }
+    .project-fs .project-dl dd { color: var(--fs-muted); }
+
+    /* FoodSync — weekly plan strip */
+    .week-strip {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+    .week-day {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 4px 12px;
+      border: 1px solid var(--fs-panel-border);
+      border-radius: var(--radius-sm);
+      background: rgba(0, 0, 0, 0.16);
+    }
+    .week-day-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--fs-accent);
+    }
+    .week-dots { display: flex; gap: 4px; }
+    .week-dots .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--fs-accent);
+    }
+    .week-dots .dot.is-empty { background: rgba(255, 255, 255, 0.16); }
 
 .type-diagram .diagram-edge {
   stroke: var(--rf-accent);
@@ -1160,7 +1225,10 @@ section { padding-block: var(--sp-9); }
   .brand-name { display: none; }
   .lang-btn { padding: 6px 8px; }
   .facts-card { padding: var(--sp-5); }
-  .contact-form { padding: var(--sp-5); }
-  .tabs { width: 100%; }
-  .tab { flex: 1 1 auto; padding: 10px 12px; font-size: 0.8125rem; }
+      .contact-form { padding: var(--sp-5); }
+      .tabs { width: 100%; }
+      .tab { flex: 1 1 auto; padding: 10px 12px; font-size: 0.8125rem; }
+      .week-day { padding: 8px 2px 10px; gap: 5px; }
+      .week-dots { gap: 3px; }
+      .week-dots .dot { width: 5px; height: 5px; }
 }
