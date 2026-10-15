@@ -1,0 +1,78 @@
+RBSoft (https://www.rbsoft.ch/) — original content, verbatim capture
+Captured: 2026-10-15 via full-page text extraction of the live site.
+This file is the single source of truth for the content-preservation audit
+(see docs/content-audit.md and tools/content_audit.py).
+--------------------------------------------------------------------------
+
+[Hero / H1]
+Software - die passt!
+
+[Hero / paragraph]
+Ob individuelle Anwendungen, angepasste Standard-Software oder günstige "Low-Code-Apps", unsere Softwarelösungen richten sich immer nach den individuellen Anforderungen und Prozessen unserer Kunden
+
+[Section heading]
+Dienstleistungen
+
+[Section intro]
+Erfolgreiche Umsetzung von kundenindividuellen Software-Anwendungen als oberstes Ziel.
+
+[Service 1 — title]
+Konzeption
+[Service 1 — body]
+Ausgerichtet an Ihren Geschäftsideen, Ihren Prozessen und Ihrem Marktpotential gestalten wir gemeinsam die Software-Anwendung, welche als strategisches Element Ihres künftigen Geschäftserfolges zählen wird.
+
+[Service 2 — title]
+Entwicklung
+[Service 2 — body, paragraph 1]
+Mit Prototyping vermitteln wir unseren Kunden ein erstes Nutzererlebnis und runden das Design ab.
+[Service 2 — body, paragraph 2]
+Mit etablierten Tools setzen wir Ihre Anforderungen professionell, zielgerichtet und kosteneffizient als Qualitätsprodukt um.
+
+[Service 3 — title]
+App Übernahme
+[Service 3 — body, paragraph 1]
+Betreiben Sie bereits eine individuelle Software-Anwendung und suchen einen neuen IT-Spezialisten zur Betreuung oder Weiterentwicklung?
+[Service 3 — body, paragraph 2]
+Wir haben in der Vergangenheit mehrere Anwendungen erfolgreich übernommen, erweitert oder in neue moderne Software transferiert.
+
+[Service 4 — title]
+Betrieb & Support
+[Service 4 — body, paragraph 1]
+Gehostet im Rechenzentrum unseres bewährten Hostingpartners bieten wir einen zuverlässigen, sicheren und hoch verfügbaren Betrieb Ihrer Geschäftsanwendung.
+[Service 4 — body, paragraph 2]
+Wir bieten kompetenten, unkomplizierten und freundlichen Support zur schnellen Erledigung Ihrer Anliegen.
+
+[Contact block — Adresse]
+Adresse
+RBSoft
+Reto Bergamin
+Walderstrasse 43d
+CH-8340 Hinwil
+Switzerland
+
+[Contact block — Kontakt]
+Kontakt
+info@rbsoft.ch
++41 76 388 43 00
+
+[Contact block — Technologien]
+Technologien
+.Net Core
+Angular
+DevExpress
+PostgreSql
+MS-SQL-Server
+
+[Footer]
+© Copyright 2025 RBSoft - Alle Rechte vorbehalten
+
+[Logo (image text, preserved as original logo file + alt attribute)]
+RBSoft
+Business Software for you
+
+[Original image assets (local copies in assets/img/)]
+assets/img/services/konzeption.jpg      ← /assets/images/dreamstimeextrasmall-111830510.jpg
+assets/img/services/entwicklung.jpg     ← /assets/images/dreamstimeextrasmall-137161761.jpg
+assets/img/services/app-uebernahme.jpg  ← /assets/images/dreamstimeextrasmall-38148894.jpg
+assets/img/services/betrieb-support.jpg ← /assets/images/dreamstimeextrasmall-242985307.jpg
+assets/img/rbsoft-logo.png              ← original RBSoft wordmark (transparent PNG, 406×122)

@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="de" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RBSoft – Software - die passt!</title>
+<meta name="description" content="Ob individuelle Anwendungen, angepasste Standard-Software oder günstige &quot;Low-Code-Apps&quot;, unsere Softwarelösungen richten sich immer nach den individuellen Anforderungen und Prozessen unserer Kunden">
+<meta name="theme-color" content="#04101f">
+<link rel="icon" type="image/png" href="assets/img/rbsoft-logo.png">
+<link rel="preload" href="assets/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/ibm-plex-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/main.css">
+<script>
+  /* Presentation-layer bootstrap: enables JS-only UI and decides whether the
+     initialisation sequence runs (skipped for reduced motion + returning visitors). */
+  (function () {
+    var d = document.documentElement;
+    d.classList.remove('no-js');
+    d.classList.add('js');
+    var skip = false;
+    try {
+      skip = window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+             window.sessionStorage.getItem('rb-boot') === '1';
+    } catch (e) { skip = false; }
+    d.classList.add(skip ? 'boot-skipped' : 'booting');
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
+
+<!-- Initialisation sequence (presentation layer only, ~0.9s, self-removing) -->
+<div id="boot" class="boot" aria-hidden="true">
+  <div class="boot__frame">
+    <div class="boot__hex mono" id="bootHex"></div>
+    <div class="boot__bar"><span id="bootBar"></span></div>
+    <div class="boot__status mono">
+      <span class="boot__pct" id="bootPct">000</span>
+      <span class="boot__ok" id="bootOk">&#10003;</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Original header / logo (unchanged) ===== -->
+<header class="site-header">
+  <div class="container site-header__in">
+    <img class="site-header__logo" src="assets/img/rbsoft-logo.png" width="406" height="122"
+         alt="RBSoft – Business Software for you">
+  </div>
+</header>
+
+<nav class="secnav" aria-label="Seitenbereiche">
+  <div class="container secnav__in">
+    <ul class="secnav__list">
+      <li><a class="secnav__link" href="#start"><span class="secnav__idx mono" aria-hidden="true">01</span>Start<span class="secnav__cursor" aria-hidden="true"></span></a></li>
+      <li><a class="secnav__link" href="#dienstleistungen"><span class="secnav__idx mono" aria-hidden="true">02</span>Dienstleistungen<span class="secnav__cursor" aria-hidden="true"></span></a></li>
+      <li><a class="secnav__link" href="#kontakt"><span class="secnav__idx mono" aria-hidden="true">03</span>Kontakt<span class="secnav__cursor" aria-hidden="true"></span></a></li>
+    </ul>
+    <p class="secnav__sys mono" aria-hidden="true"><span class="secnav__dot"></span><span id="clock">00:00:00</span></p>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- 01 / Hero -->
+  <section class="hero" id="start" data-spy>
+    <div class="container hero__in">
+      <div class="hero__copy">
+        <p class="hero__eyebrow mono" aria-hidden="true">//<span class="hero__eyeline"></span>01</p>
+        <h1 class="hero__title" data-decode>Software - die passt!</h1>
+        <p class="hero__lead">Ob individuelle Anwendungen, angepasste Standard-Software oder günstige "Low-Code-Apps", unsere Softwarelösungen richten sich immer nach den individuellen Anforderungen und Prozessen unserer Kunden</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#dienstleistungen">Dienstleistungen</a>
+          <a class="btn btn--ghost" href="#kontakt">Kontakt</a>
+        </div>
+      </div>
+      <div class="terminal" aria-hidden="true">
+        <div class="terminal__bar">
+          <span class="terminal__dot terminal__dot--blue"></span>
+          <span class="terminal__dot terminal__dot--orange"></span>
+          <span class="terminal__dot terminal__dot--red"></span>
+          <span class="terminal__sig mono">0xF0A1::RB</span>
+        </div>
+        <div class="terminal__body mono" id="hexStream">3F 8A 01 C4 7D 02 E9 10
+6B 55 A0 1F 8C 04 D7 2E
+09 F1 47 BB 03 9A 60 1C
+74 08 E2 5D 06 C3 18 90
+2B 6F A4 05 F8 11 83 4D
+C7 16 5E 0A D0 29 71 0E</div>
+        <div class="terminal__foot">
+          <span class="terminal__track"><span id="heroBar"></span></span>
+          <span class="terminal__pct mono" id="heroPct">38%</span>
+        </div>
+      </div>
+    </div>
+    <a class="hero__cue" href="#dienstleistungen" aria-label="Weiter zu Dienstleistungen">
+      <span class="hero__cuebox mono" aria-hidden="true">&darr;</span>
+    </a>
+  </section>
+
+  <!-- 02 / Dienstleistungen -->
+  <section class="services" id="dienstleistungen" data-spy>
+    <div class="container">
+      <header class="sec-head" data-reveal>
+        <p class="sec-head__idx mono" aria-hidden="true">02</p>
+        <h2 class="sec-head__title" data-decode>Dienstleistungen</h2>
+        <p class="sec-head__lead">Erfolgreiche Umsetzung von kundenindividuellen Software-Anwendungen als oberstes Ziel.</p>
+      </header>
+
+      <div class="cards">
+        <article class="card card--w7" data-reveal>
+          <div class="card__media">
+            <img src="assets/img/services/konzeption.jpg" width="480" height="320" loading="lazy"
+                 alt="Mehrere Personen planen an einem Tisch mit Laptop, Smartphone, farbigen Notizen und Diagrammen">
+            <span class="card__idx mono" aria-hidden="true">01</span>
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Konzeption</h3>
+            <p>Ausgerichtet an Ihren Geschäftsideen, Ihren Prozessen und Ihrem Marktpotential gestalten wir gemeinsam die Software-Anwendung, welche als strategisches Element Ihres künftigen Geschäftserfolges zählen wird.</p>
+          </div>
+        </article>
+
+        <article class="card card--w5" data-reveal style="--d:90ms">
+          <div class="card__media">
+            <img src="assets/img/services/entwicklung.jpg" width="480" height="320" loading="lazy"
+                 alt="Quellcode auf mehreren Bildschirmen während ein Ablaufdiagramm auf Papier geprüft wird">
+            <span class="card__idx mono" aria-hidden="true">02</span>
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Entwicklung</h3>
+            <p>Mit Prototyping vermitteln wir unseren Kunden ein erstes Nutzererlebnis und runden das Design ab.</p>
+            <p>Mit etablierten Tools setzen wir Ihre Anforderungen professionell, zielgerichtet und kosteneffizient als Qualitätsprodukt um.</p>
+          </div>
+        </article>
+
+        <article class="card card--w5" data-reveal>
+          <div class="card__media">
+            <img src="assets/img/services/app-uebernahme.jpg" width="480" height="320" loading="lazy"
+                 alt="Goldfische springen von einem Fischglas in ein anderes, Sinnbild für die Übernahme einer Anwendung">
+            <span class="card__idx mono" aria-hidden="true">03</span>
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">App Übernahme</h3>
+            <p>Betreiben Sie bereits eine individuelle Software-Anwendung und suchen einen neuen IT-Spezialisten zur Betreuung oder Weiterentwicklung?</p>
+            <p>Wir haben in der Vergangenheit mehrere Anwendungen erfolgreich übernommen, erweitert oder in neue moderne Software transferiert.</p>
+          </div>
+        </article>
+
+        <article class="card card--w7" data-reveal style="--d:90ms">
+          <div class="card__media">
+            <img src="assets/img/services/betrieb-support.jpg" width="480" height="320" loading="lazy"
+                 alt="Zwei Hände schützen eine leuchtende Wolke aus Leiterbahnen, Sinnbild für sicheren Betrieb">
+            <span class="card__idx mono" aria-hidden="true">04</span>
+          </div>
+          <div class="card__body">
+            <h3 class="card__title">Betrieb &amp; Support</h3>
+            <p>Gehostet im Rechenzentrum unseres bewährten Hostingpartners bieten wir einen zuverlässigen, sicheren und hoch verfügbaren Betrieb Ihrer Geschäftsanwendung.</p>
+            <p>Wir bieten kompetenten, unkomplizierten und freundlichen Support zur schnellen Erledigung Ihrer Anliegen.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 / Kontakt -->
+  <section class="contact" id="kontakt" data-spy>
+    <div class="container">
+      <div class="sec-rule" data-reveal>
+        <p class="sec-rule__idx mono" aria-hidden="true">03</p>
+        <span class="sec-rule__line" aria-hidden="true"></span>
+      </div>
+
+      <div class="panels">
+        <section class="panel" data-reveal>
+          <h3 class="panel__title mono">Adresse</h3>
+          <p class="panel__lines">
+            RBSoft<br>
+            Reto Bergamin<br>
+            Walderstrasse 43d<br>
+            CH-8340 Hinwil<br>
+            Switzerland
+          </p>
+        </section>
+
+        <section class="panel" data-reveal style="--d:90ms">
+          <h3 class="panel__title mono">Kontakt</h3>
+          <ul class="panel__list">
+            <li>
+              <a href="mailto:info@rbsoft.ch">
+                <svg class="panel__ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5h13v9h-13zM1.5 4l6.5 5 6.5-5"/></svg>
+                <span class="mono">info@rbsoft.ch</span>
+              </a>
+            </li>
+            <li>
+              <a href="tel:+41763884300">
+                <svg class="panel__ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5h3l1.5 3.5-2 1.5a10 10 0 0 0 4 4l1.5-2 3.5 1.5v3a1.5 1.5 0 0 1-1.6 1.5A13.5 13.5 0 0 1 1.5 3.1 1.5 1.5 0 0 1 3 1.5z"/></svg>
+                <span class="mono">+41 76 388 43 00</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <section class="panel" data-reveal style="--d:180ms">
+          <h3 class="panel__title mono">Technologien</h3>
+          <ul class="stack">
+            <li class="mono" data-i="01">.Net Core</li>
+            <li class="mono" data-i="02">Angular</li>
+            <li class="mono" data-i="03">DevExpress</li>
+            <li class="mono" data-i="04">PostgreSql</li>
+            <li class="mono" data-i="05">MS-SQL-Server</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer__in">
+    <p class="site-footer__copy">© Copyright 2025 RBSoft - Alle Rechte vorbehalten</p>
+    <a class="site-footer__top mono" href="#start" aria-label="Zum Seitenanfang">&uarr;</a>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
