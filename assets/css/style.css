@@ -40,14 +40,15 @@
       --fs-muted: rgba(238, 246, 236, 0.75);
       --fs-panel: rgba(255, 255, 255, 0.05);
 
-      /* project tones — Cyberskills (dark green, clean hacker tone) */
-  --cs-bg-1: #0c2419;
-  --cs-bg-2: #081a12;
-  --cs-border: rgba(255, 255, 255, 0.12);
-  --cs-accent: #7dd8a5;
-  --cs-text: #e9f4ed;
-  --cs-muted: rgba(233, 244, 237, 0.74);
-  --cs-panel: rgba(255, 255, 255, 0.045);
+  /* project tones — RBSoft (blue with orange/red brand accents) */
+  --rb-bg-1: #0d2c4e;
+  --rb-bg-2: #04101f;
+  --rb-border: rgba(255, 102, 0, 0.42);
+  --rb-accent: #ff7a1f;
+  --rb-accent-hot: #ff4b35;
+  --rb-text: #edf5ff;
+  --rb-muted: rgba(237, 245, 255, 0.78);
+  --rb-panel: rgba(255, 255, 255, 0.05);
 
   /* spacing */
   --sp-1: 4px;
@@ -715,10 +716,12 @@ section { padding-block: var(--sp-9); }
   background: linear-gradient(155deg, var(--rf-bg-1), var(--rf-bg-2));
   color: var(--rf-text);
 }
-.project-cs {
-  background: linear-gradient(155deg, var(--cs-bg-1), var(--cs-bg-2));
-  color: var(--cs-text);
-  border-color: var(--cs-border);
+.project-rb {
+  background:
+    radial-gradient(ellipse at 92% 8%, rgba(255, 102, 0, 0.14), transparent 34%),
+    linear-gradient(155deg, var(--rb-bg-1), var(--rb-bg-2));
+  color: var(--rb-text);
+  border-color: var(--rb-border);
 }
 
 .project-fs {
@@ -740,7 +743,7 @@ section { padding-block: var(--sp-9); }
   color: var(--rf-accent);
   background: rgba(255, 255, 255, 0.04);
 }
-.project-cs .project-tag { border-color: var(--cs-border); color: var(--cs-accent); }
+.project-rb .project-tag { border-color: var(--rb-border); color: var(--rb-accent); }
 
 .project h3 {
   font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.1rem);
@@ -751,7 +754,7 @@ section { padding-block: var(--sp-9); }
   font-size: var(--text-lg);
   color: var(--rf-muted);
 }
-.project-cs .project-copy > p { color: var(--cs-muted); }
+.project-rb .project-copy > p { color: var(--rb-muted); }
 
 .fact-chips {
   display: flex;
@@ -769,7 +772,7 @@ section { padding-block: var(--sp-9); }
   letter-spacing: 0.04em;
   color: var(--rf-text);
 }
-.project-cs .fact-chip { border-color: var(--cs-border); background: var(--cs-panel); color: var(--cs-text); }
+.project-rb .fact-chip { border-color: var(--rb-border); background: var(--rb-panel); color: var(--rb-text); }
 
 .project-cta {
   display: inline-flex;
@@ -786,10 +789,12 @@ section { padding-block: var(--sp-9); }
 }
 .project-cta:hover { filter: brightness(1.1); }
 .project-cta:active { transform: translateY(1px); }
-.project-cs .project-cta { background: var(--cs-accent); color: var(--cs-bg-2); }
+.project-rb .project-cta { background: linear-gradient(110deg, var(--rb-accent), var(--rb-accent-hot)); color: var(--rb-bg-2); }
 
 .project-fs .project-dl dt { color: var(--fs-accent); }
 .project-fs .project-dl dd { color: var(--fs-muted); }
+.project-rb .project-dl dt { color: var(--rb-accent); }
+.project-rb .project-dl dd { color: var(--rb-muted); }
 
 .project-dl { margin-top: var(--sp-5); display: grid; gap: var(--sp-4); }
 .project-dl dt {
@@ -797,9 +802,9 @@ section { padding-block: var(--sp-9); }
   font-size: var(--text-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--cs-accent);
+  color: var(--rf-accent);
 }
-.project-dl dd { margin-top: var(--sp-1); font-size: 0.9375rem; color: var(--cs-muted); }
+.project-dl dd { margin-top: var(--sp-1); font-size: 0.9375rem; color: var(--rf-muted); }
 
 /* ================================================================
    11. CONTACT / FORM
